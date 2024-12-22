@@ -1,16 +1,20 @@
 package com.authenticate.Infosys_EDoctor.Controller;
 
+import com.authenticate.Infosys_EDoctor.DTO.DoctorStatsDTO;
+import com.authenticate.Infosys_EDoctor.DTO.PatientStatsDTO;
+import com.authenticate.Infosys_EDoctor.DTO.WebStatsBetweenDTO;
+import com.authenticate.Infosys_EDoctor.DTO.WebStatsDTO;
 import com.authenticate.Infosys_EDoctor.Entity.*;
-import com.authenticate.Infosys_EDoctor.Repository.UserRepository;
 import com.authenticate.Infosys_EDoctor.Service.AdminService;
+import com.authenticate.Infosys_EDoctor.Service.DoctorService;
+import com.authenticate.Infosys_EDoctor.Service.PatientService;
 import com.authenticate.Infosys_EDoctor.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.Doc;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -23,6 +27,12 @@ public class AdminController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    DoctorService doctorService;
+
+    @Autowired
+    PatientService patientService;
+
     private boolean checkLoginAndValid(String username) {
         if(username == null) {
             return false;
@@ -32,7 +42,7 @@ public class AdminController {
         return user != null;
     }
 
-    @PostMapping("/addAdmin/{username}")
+    @PostMapping("/addAdmin")
     public ResponseEntity<?> addAdmin(@RequestBody Admin admin, @PathVariable String username) {
         if(username == null) {
             ResponseEntity.badRequest().body("Enter username to add admin.");
@@ -51,7 +61,7 @@ public class AdminController {
         return ResponseEntity.ok(savedAdmin);
     }
 
-    @PutMapping("/addAdmin/{adminId}")
+    @PutMapping("/updateAdmin/{adminId}")
     public ResponseEntity<?> updateAdmin(@PathVariable String adminId, @RequestBody Admin admin) {
         Admin updatedAdmin = adminService.updateAdmin(adminId, admin);
 
@@ -65,8 +75,8 @@ public class AdminController {
         return ResponseEntity.ok("Admin with adminId " + adminId + " deleted successfully.");
     }
 
-    @GetMapping("/verifyAdmin")
-    public ResponseEntity<?> verifyAdmin(@RequestParam String adminId, @PathVariable String username) {
+    @GetMapping("/verifyAdmin/{adminId}")
+    public ResponseEntity<?> verifyAdmin(@PathVariable String adminId, @PathVariable String username) {
         if(checkLoginAndValid(username)) {
             String name = adminService.verifyAdmin(adminId);
 
@@ -163,7 +173,7 @@ public class AdminController {
         return ResponseEntity.ok(updatedAppointment);
     }
 
-    @DeleteMapping("/appointmentDelete")
+    @DeleteMapping("/appointmentDelete/{id}")
     public ResponseEntity<String> deleteAppointment(@PathVariable String username, @PathVariable Long id) {
         if(!checkLoginAndValid(username)) {
             return ResponseEntity.badRequest().body("Create an admin profile to access. \nAlready have a profile? Login.");
@@ -204,28 +214,69 @@ public class AdminController {
     }
 
     // --- Website Stats ---
-//    @GetMapping("/allPatientStats")
-//    public ResponseEntity<?> getPatientStats() {
+    @GetMapping("/allPatientStats")
+    public ResponseEntity<?> getPatientStats(@PathVariable String username) {
+        if(!checkLoginAndValid(username)) {
+            return ResponseEntity.badRequest().body("Create an admin profile to access. \nAlready have a profile? Login.");
+        }
+
+        List<PatientStatsDTO> patientStats = adminService.getAllPatientStats();
+
+        return ResponseEntity.ok(patientStats);
+    }
+
+    @GetMapping("/allDoctorStats")
+    public ResponseEntity<?> getDoctorStats(@PathVariable String username) {
+        if(!checkLoginAndValid(username)) {
+            return ResponseEntity.badRequest().body("Create an admin profile to access. \nAlready have a profile? Login.");
+        }
+
+        List<DoctorStatsDTO> doctorStats = adminService.getAllDoctorStats();
+
+        return ResponseEntity.ok(doctorStats);
+    }
+
+    @GetMapping("/patientStats/{patientId}")
+    public ResponseEntity<?> getPatientStatsById(@PathVariable String username, @PathVariable String patientId) {
+        if(!checkLoginAndValid(username)) {
+            return ResponseEntity.badRequest().body("Create an admin profile to access. \nAlready have a profile? Login.");
+        }
+
+        PatientStatsDTO patientStatsDTO = adminService.getPatientStatsById(patientId);
+
+        return ResponseEntity.ok(patientStatsDTO);
+    }
 //
-//    }
-//
-//    @GetMapping("/allDoctorStats")
-//    public ResponseEntity<?> getDoctorStats() {
-//
-//    }
-//
-//    @GetMapping("/patientStats")
-//    public ResponseEntity<?> getPatientStatsById(@PathVariable String username, @RequestParam String patientId) {
-//
-//    }
-//
-//    @GetMapping("/doctorStats")
-//    public ResponseEntity<?> getDoctorStatsById(@PathVariable String username, @RequestParam String doctorId) {
-//
-//    }
-//
-//    @GetMapping("/webStats")
-//    public ResponseEntity<?> getPatientStats(@RequestParam Date startDate, @RequestParam Date endDate) {
-//
-//    }
+    @GetMapping("/doctorStats/{doctorId}")
+    public ResponseEntity<?> getDoctorStatsById(@PathVariable String username, @PathVariable String doctorId) {
+        if(!checkLoginAndValid(username)) {
+            return ResponseEntity.badRequest().body("Create an admin profile to access. \nAlready have a profile? Login.");
+        }
+
+        DoctorStatsDTO doctorStatsDTO = adminService.getDoctorStatsById(doctorId);
+
+        return ResponseEntity.ok(doctorStatsDTO);
+    }
+
+    @GetMapping("/webStatsBetween")
+    public ResponseEntity<?> getWebStatsBetween(@PathVariable String username, @RequestParam String startDate, @RequestParam String endDate) {
+        if(!checkLoginAndValid(username)) {
+            return ResponseEntity.badRequest().body("Create an admin profile to access. \nAlready have a profile? Login.");
+        }
+
+        WebStatsBetweenDTO webStatsDTO = adminService.getWebStatsBetween(LocalDateTime.parse(startDate), LocalDateTime.parse(endDate));
+
+        return ResponseEntity.ok(webStatsDTO);
+    }
+
+    @GetMapping("/webStats")
+    public ResponseEntity<?> getWebStats(@PathVariable String username) {
+        if(!checkLoginAndValid(username)) {
+            return ResponseEntity.badRequest().body("Create an admin profile to access. \nAlready have a profile? Login.");
+        }
+
+        List<WebStatsDTO> webStats = adminService.getWebStats();
+
+        return ResponseEntity.ok(webStats);
+    }
 }

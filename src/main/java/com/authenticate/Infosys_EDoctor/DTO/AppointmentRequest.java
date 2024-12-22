@@ -1,4 +1,4 @@
-package com.authenticate.Infosys_EDoctor.Entity;
+package com.authenticate.Infosys_EDoctor.DTO;
 
 import lombok.Data;
 

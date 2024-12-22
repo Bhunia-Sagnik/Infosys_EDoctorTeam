@@ -1,5 +1,6 @@
 package com.authenticate.Infosys_EDoctor.Service;
 
+import com.authenticate.Infosys_EDoctor.DTO.DoctorStatsDTO;
 import com.authenticate.Infosys_EDoctor.Entity.Appointment;
 import com.authenticate.Infosys_EDoctor.Entity.Doctor;
 import com.authenticate.Infosys_EDoctor.Entity.DoctorAvailability;
@@ -28,5 +29,9 @@ public interface DoctorService {
     Doctor getDoctorByEmail(String email);
 
     List<Doctor> getDoctorsByName(String doctorName);
+
+    List<DoctorStatsDTO> getAllDoctorStats();
+
+    DoctorStatsDTO getDoctorStatsById(String doctorId);
 }
 

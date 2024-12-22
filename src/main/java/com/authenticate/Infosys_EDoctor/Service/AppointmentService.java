@@ -3,6 +3,8 @@ package com.authenticate.Infosys_EDoctor.Service;
 import com.authenticate.Infosys_EDoctor.Entity.Appointment;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public interface AppointmentService {
@@ -21,4 +23,8 @@ public interface AppointmentService {
     List<Appointment> getAppointmentsByDate(LocalDate nextDay);
 
     List<Appointment> getAllAppointments();
+
+    List<Appointment> findAppointmentsBetweenDates(LocalDateTime startDate, LocalDateTime endDate);
+
+    List<Object[]> getAppointmentsGroupedByDate();
 }

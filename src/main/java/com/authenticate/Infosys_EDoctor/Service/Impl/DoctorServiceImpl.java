@@ -1,5 +1,6 @@
 package com.authenticate.Infosys_EDoctor.Service.Impl;
 
+import com.authenticate.Infosys_EDoctor.DTO.DoctorStatsDTO;
 import com.authenticate.Infosys_EDoctor.Entity.Appointment;
 import com.authenticate.Infosys_EDoctor.Entity.Doctor;
 import com.authenticate.Infosys_EDoctor.Entity.DoctorAvailability;
@@ -11,8 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class DoctorServiceImpl implements DoctorService {
@@ -140,6 +141,89 @@ public class DoctorServiceImpl implements DoctorService {
         }
 
         return fetched;
+    }
+
+    @Override
+    public List<DoctorStatsDTO> getAllDoctorStats() {
+        // Fetch all doctors from the repository
+        List<Doctor> doctors = doctorRepository.findAll();
+
+        // Process each doctor to calculate their stats
+        return doctors.stream().map(doctor -> {
+            // Fetch all appointments for the current doctor
+            List<Appointment> appointments = appointmentService.getAppointmentsForDoctor(doctor.getDoctorId());
+
+            long totalAppointments = appointments.size();
+            long pendingAppointments = appointments.stream()
+                    .filter(appointment -> appointment.getStatus() == Appointment.Status.Pending)
+                    .count();
+            long cancelledAppointments = appointments.stream()
+                    .filter(appointment -> appointment.getStatus() == Appointment.Status.Cancelled)
+                    .count();
+            long confirmedAppointments = appointments.stream()
+                    .filter(appointment -> appointment.getStatus() == Appointment.Status.Confirmed)
+                    .count();
+            long paidAppointments = appointments.stream()
+                    .filter(appointment -> appointment.getStatus() == Appointment.Status.Confirmed && appointment.isPaid())
+                    .count();
+            long unpaidAppointments = appointments.stream()
+                    .filter(appointment -> appointment.getStatus() == Appointment.Status.Confirmed && !appointment.isPaid())
+                    .count();
+
+            // Create and return the DoctorDTO for this doctor
+            return new DoctorStatsDTO(
+                    doctor.getDoctorId(),
+                    doctor.getName(),
+                    doctor.getEmail(),
+                    doctor.getMobileNo(),
+                    doctor.getSpecialization(),
+                    totalAppointments,
+                    pendingAppointments,
+                    cancelledAppointments,
+                    confirmedAppointments,
+                    paidAppointments,
+                    unpaidAppointments
+            );
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public DoctorStatsDTO getDoctorStatsById(String doctorId) {
+        Doctor doctor = getDoctorById(doctorId);
+
+        // Fetch all appointments for the doctor
+        List<Appointment> appointments = appointmentService.getAppointmentsForDoctor(doctorId);
+
+        long totalAppointments = appointments.size();
+        long pendingAppointments = appointments.stream()
+                .filter(appointment -> appointment.getStatus() == Appointment.Status.Pending)
+                .count();
+        long cancelledAppointments = appointments.stream()
+                .filter(appointment -> appointment.getStatus() == Appointment.Status.Cancelled)
+                .count();
+        long confirmedAppointments = appointments.stream()
+                .filter(appointment -> appointment.getStatus() == Appointment.Status.Confirmed)
+                .count();
+        long paidAppointments = appointments.stream()
+                .filter(appointment -> appointment.getStatus() == Appointment.Status.Confirmed && appointment.isPaid())
+                .count();
+        long unpaidAppointments = appointments.stream()
+                .filter(appointment -> appointment.getStatus() == Appointment.Status.Confirmed && !appointment.isPaid())
+                .count();
+
+        return new DoctorStatsDTO(
+                doctor.getDoctorId(),
+                doctor.getName(),
+                doctor.getEmail(),
+                doctor.getMobileNo(),
+                doctor.getSpecialization(),
+                totalAppointments,
+                pendingAppointments,
+                cancelledAppointments,
+                confirmedAppointments,
+                paidAppointments,
+                unpaidAppointments
+        );
     }
 }
 

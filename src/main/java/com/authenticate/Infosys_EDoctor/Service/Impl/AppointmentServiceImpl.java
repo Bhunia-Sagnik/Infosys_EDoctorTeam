@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -113,4 +115,16 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<Appointment> getAllAppointments() {
         return appointmentRepository.findAll();
     }
+
+    @Override
+    public List<Appointment> findAppointmentsBetweenDates(LocalDateTime startDate, LocalDateTime endDate) {
+        return appointmentRepository.findAppointmentsBetweenDates(startDate, endDate);
+    }
+
+    @Override
+    public List<Object[]> getAppointmentsGroupedByDate() {
+        return appointmentRepository.findAppointmentsGroupedByDate();
+    }
+
+
 }

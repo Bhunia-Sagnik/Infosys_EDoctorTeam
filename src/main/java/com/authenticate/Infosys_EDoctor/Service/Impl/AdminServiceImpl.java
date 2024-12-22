@@ -1,5 +1,9 @@
 package com.authenticate.Infosys_EDoctor.Service.Impl;
 
+import com.authenticate.Infosys_EDoctor.DTO.DoctorStatsDTO;
+import com.authenticate.Infosys_EDoctor.DTO.PatientStatsDTO;
+import com.authenticate.Infosys_EDoctor.DTO.WebStatsBetweenDTO;
+import com.authenticate.Infosys_EDoctor.DTO.WebStatsDTO;
 import com.authenticate.Infosys_EDoctor.Entity.Admin;
 import com.authenticate.Infosys_EDoctor.Entity.Appointment;
 import com.authenticate.Infosys_EDoctor.Entity.Doctor;
@@ -14,9 +18,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -57,10 +61,8 @@ public class AdminServiceImpl implements AdminService {
         Admin existingAdmin = adminRepository.findById(adminId)
                 .orElseThrow(() -> new IllegalArgumentException("Admin not found with ID: " + adminId));
 
-        existingAdmin.setName(updatedAdmin.getName());
-        existingAdmin.setEmail(updatedAdmin.getEmail());
-        existingAdmin.setPassword(passwordEncoder.encode(updatedAdmin.getPassword()));
-        existingAdmin.setMobileNo(updatedAdmin.getMobileNo());
+        existingAdmin.setName(updatedAdmin.getName() != null? updatedAdmin.getName() : existingAdmin.getName());
+        existingAdmin.setMobileNo(updatedAdmin.getMobileNo() != null? updatedAdmin.getMobileNo(): existingAdmin.getMobileNo());
 
         return adminRepository.save(existingAdmin);
     }
@@ -70,7 +72,7 @@ public class AdminServiceImpl implements AdminService {
     public String verifyAdmin(String adminId) {
         Admin admin = adminRepository.findById(adminId)
                 .orElseThrow(() -> new RuntimeException("Admin not found with ID: " + adminId));
-        return "Admin with ID " + adminId + " verified successfully.";
+        return admin.getName();
     }
 
     // 4. Delete Admin
@@ -142,4 +144,115 @@ public class AdminServiceImpl implements AdminService {
     public Appointment addAppointment(Appointment appointment) {
         return appointmentService.scheduleAppointment(appointment);
     }
+
+    @Override
+    public PatientStatsDTO getPatientStatsById(String patientId) {
+        return patientService.getPatientStatsById(patientId);
+    }
+
+    @Override
+    public List<PatientStatsDTO> getAllPatientStats() {
+        return patientService.getAllPatientStats();
+    }
+
+    @Override
+    public List<DoctorStatsDTO> getAllDoctorStats() {
+        return doctorService.getAllDoctorStats();
+    }
+
+    @Override
+    public DoctorStatsDTO getDoctorStatsById(String doctorId) {
+        return doctorService.getDoctorStatsById(doctorId);
+    }
+
+    @Override
+    public WebStatsBetweenDTO getWebStatsBetween(LocalDateTime startDate, LocalDateTime endDate) {
+        // Fetch all appointments between the given dates
+        List<Appointment> appointments = appointmentService.findAppointmentsBetweenDates(startDate, endDate);
+
+        // Initialize counters
+        int totalAppointments = appointments.size();
+        int pendingAppointments = 0;
+        int confirmedAppointments = 0;
+        int cancelledAppointments = 0;
+        int paidConfirmedAppointments = 0;
+        int unpaidConfirmedAppointments = 0;
+
+        // Calculate stats
+        for (Appointment appointment : appointments) {
+            switch (appointment.getStatus()) {
+                case Pending -> pendingAppointments++;
+                case Confirmed -> {
+                    confirmedAppointments++;
+                    if (appointment.isPaid()) {
+                        paidConfirmedAppointments++;
+                    } else {
+                        unpaidConfirmedAppointments++;
+                    }
+                }
+                case Cancelled -> cancelledAppointments++;
+            }
+        }
+
+        // Create and return WebStatsDTO
+        return new WebStatsBetweenDTO(
+                startDate,
+                endDate,
+                totalAppointments,
+                pendingAppointments,
+                confirmedAppointments,
+                cancelledAppointments,
+                paidConfirmedAppointments,
+                unpaidConfirmedAppointments
+        );
+    }
+
+    @Override
+    public List<WebStatsDTO> getWebStats() {
+        List<Object[]> groupedAppointments = appointmentService.getAppointmentsGroupedByDate();
+
+        // Use a map to accumulate statistics by date
+        Map<String, WebStatsDTO> statsMap = new HashMap<>();
+
+        // Process each record from the grouped results
+        for (Object[] record : groupedAppointments) {
+            // Assuming record[0] is a java.sql.Date or String representation of the date
+            String date = (String) record[0];  // The date as String (yyyy-MM-dd)
+
+            // Status as an enum (convert it to a String)
+            Appointment.Status status = (Appointment.Status) record[1];
+            String statusString = status.name();  // Converts Status enum to its string value (Pending, Confirmed, Cancelled)
+
+            // Payment status (converted to boolean or other suitable type)
+            Boolean paid = (Boolean) record[2]; // Payment status (Paid or Unpaid)
+
+            long count = (long) record[3]; // Number of appointments for this combination
+
+            // Get the existing WebStatsDTO or create a new one
+            WebStatsDTO statsDTO = statsMap.getOrDefault(date, new WebStatsDTO(date, 0, 0, 0, 0, 0, 0));
+
+            // Update statistics based on the status
+            statsDTO.setTotalAppointments(statsDTO.getTotalAppointments() + count);
+
+            if ("PENDING".equalsIgnoreCase(statusString)) {
+                statsDTO.setPendingAppointments(statsDTO.getPendingAppointments() + count);
+            } else if ("CONFIRMED".equalsIgnoreCase(statusString)) {
+                statsDTO.setConfirmedAppointments(statsDTO.getConfirmedAppointments() + count);
+                if (paid != null && paid) {
+                    statsDTO.setPaidConfirmedAppointments(statsDTO.getPaidConfirmedAppointments() + count);
+                } else if (paid != null && !paid) {
+                    statsDTO.setUnpaidConfirmedAppointments(statsDTO.getUnpaidConfirmedAppointments() + count);
+                }
+            } else if ("CANCELLED".equalsIgnoreCase(statusString)) {
+                statsDTO.setCancelledAppointments(statsDTO.getCancelledAppointments() + count);
+            }
+
+            // Save back the updated DTO
+            statsMap.put(date, statsDTO);
+        }
+
+        // Return a list of all statistics
+        return new ArrayList<>(statsMap.values());
+    }
+
 }

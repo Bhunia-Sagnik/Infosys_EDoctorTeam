@@ -1,8 +1,8 @@
 package com.authenticate.Infosys_EDoctor.Service;
 
+import com.authenticate.Infosys_EDoctor.DTO.AppointmentRequest;
+import com.authenticate.Infosys_EDoctor.DTO.PatientStatsDTO;
 import com.authenticate.Infosys_EDoctor.Entity.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,4 +33,8 @@ public interface PatientService {
     List<Appointment> viewConfirmedAppointments(String patientId);
 
     List<Patient> getAllPatients();
+
+    List<PatientStatsDTO> getAllPatientStats();
+
+    PatientStatsDTO getPatientStatsById(String patientId);
 }
