@@ -5,10 +5,7 @@ import com.authenticate.Infosys_EDoctor.DTO.PatientStatsDTO;
 import com.authenticate.Infosys_EDoctor.DTO.WebStatsBetweenDTO;
 import com.authenticate.Infosys_EDoctor.DTO.WebStatsDTO;
 import com.authenticate.Infosys_EDoctor.Entity.*;
-import com.authenticate.Infosys_EDoctor.Service.AdminService;
-import com.authenticate.Infosys_EDoctor.Service.DoctorService;
-import com.authenticate.Infosys_EDoctor.Service.PatientService;
-import com.authenticate.Infosys_EDoctor.Service.UserService;
+import com.authenticate.Infosys_EDoctor.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +29,9 @@ public class AdminController {
 
     @Autowired
     PatientService patientService;
+
+    @Autowired
+    NotificationService notificationService;
 
     private boolean checkLoginAndValid(String username) {
         if(username == null) {
@@ -58,6 +58,8 @@ public class AdminController {
 
         Admin savedAdmin = adminService.addAdmin(admin);
 
+        notificationService.sendAdminProfileCreatedNotification(savedAdmin.getEmail(), savedAdmin.getAdminId());
+
         return ResponseEntity.ok(savedAdmin);
     }
 
@@ -65,12 +67,18 @@ public class AdminController {
     public ResponseEntity<?> updateAdmin(@PathVariable String adminId, @RequestBody Admin admin) {
         Admin updatedAdmin = adminService.updateAdmin(adminId, admin);
 
+        notificationService.sendAdminProfileUpdatedNotification(updatedAdmin.getEmail(), updatedAdmin.getAdminId());
+
         return ResponseEntity.ok(updatedAdmin);
     }
 
     @DeleteMapping("/deleteAdmin/{adminId}")
     public ResponseEntity<?> deleteAdmin(@PathVariable String adminId) {
+        Admin admin = adminService.getAdminById(adminId);
+
         adminService.deleteAdmin(adminId);
+
+        notificationService.sendAdminProfileDeletedNotification(admin.getEmail(), adminId);
 
         return ResponseEntity.ok("Admin with adminId " + adminId + " deleted successfully.");
     }
@@ -108,6 +116,9 @@ public class AdminController {
         }
 
         Patient updatedPatient = adminService.updatePatient(patientId, patient);
+
+        notificationService.sendProfileUpdatedByAdminNotification(updatedPatient.getEmail(), updatedPatient.getPatientId());
+
         return ResponseEntity.ok(updatedPatient);
     }
 
@@ -117,7 +128,12 @@ public class AdminController {
             return ResponseEntity.badRequest().body("Create an admin profile to access. \nAlready have a profile? Login.");
         }
 
+        Patient patient = patientService.getPatientById(patientId);
+
         adminService.deletePatient(patientId);
+
+        notificationService.sendProfileDeletedByAdminNotification(patient.getEmail(), patientId);
+
         return ResponseEntity.ok("Patient with patientId '" + patientId + "' deleted successfully.");
     }
 
@@ -139,6 +155,9 @@ public class AdminController {
         }
 
         Doctor updatedDoctor = adminService.updateDoctor(doctorId, doctor);
+
+        notificationService.sendProfileUpdatedByAdminNotification(updatedDoctor.getEmail(), updatedDoctor.getDoctorId());
+
         return ResponseEntity.ok(doctor);
     }
 
@@ -148,7 +167,12 @@ public class AdminController {
             return ResponseEntity.badRequest().body("Create an admin profile to access. \nAlready have a profile? Login.");
         }
 
+        Doctor doctor = doctorService.getDoctorById(doctorId);
+
         adminService.deleteDoctor(doctorId);
+
+        notificationService.sendProfileDeletedByAdminNotification(doctor.getEmail(), doctorId);
+
         return ResponseEntity.ok("Patient with doctorId '" + doctorId + "' deleted successfully.");
     }
 
@@ -160,6 +184,10 @@ public class AdminController {
         }
 
         Appointment createdAppointment = adminService.addAppointment(appointment);
+
+        notificationService.sendNewAppointmentNotificationToDoctor(createdAppointment);
+        notificationService.sendNewAppointmentNotificationToPatient(createdAppointment);
+
         return new ResponseEntity<>(createdAppointment, HttpStatus.CREATED);
     }
 
@@ -170,6 +198,9 @@ public class AdminController {
         }
 
         Appointment updatedAppointment = adminService.updateAppointment(id, appointment);
+
+        notificationService.sendUpdatedAppointmentNotificationToPatient(updatedAppointment);
+
         return ResponseEntity.ok(updatedAppointment);
     }
 
@@ -180,6 +211,10 @@ public class AdminController {
         }
 
         adminService.deleteAppointment(id);
+
+        notificationService.sendAppointmentCancellationNotification(id, "Cancelled by Admin", true);
+        notificationService.sendAppointmentCancellationNotification(id, "Cancelled by Admin", false);
+
         return ResponseEntity.ok("Appointment with ID " + id + " deleted successfully.");
     }
 

@@ -45,4 +45,6 @@ public class Appointment {
     @Lob
     @Column(name = "invoice_pdf", columnDefinition = "BLOB")
     private byte[] invoicePdf;
+
+    private boolean feedbackGiven = false;
 }

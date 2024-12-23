@@ -255,4 +255,9 @@ public class AdminServiceImpl implements AdminService {
         return new ArrayList<>(statsMap.values());
     }
 
+    @Override
+    public Admin getAdminById(String adminId) {
+        return adminRepository.getReferenceById(adminId);
+    }
+
 }

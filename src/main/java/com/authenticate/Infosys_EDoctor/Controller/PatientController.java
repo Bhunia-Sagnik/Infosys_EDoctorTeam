@@ -68,6 +68,7 @@ public class PatientController {
 
         // Update profile
         Patient updatedPatient = patientService.updateProfile(oldPatient.getPatientId(), patient);
+
         return ResponseEntity.ok(updatedPatient);
     }
 
@@ -148,6 +149,7 @@ public class PatientController {
 
         Appointment savedAppointment = patientService.makeAppointment(appointment);
 
+        notificationService.sendNewAppointmentNotificationToPatient(savedAppointment);
         notificationService.sendNewAppointmentNotificationToDoctor(savedAppointment);
         return ResponseEntity.ok(savedAppointment);
     }
@@ -184,7 +186,7 @@ public class PatientController {
         User user = userService.getUserByUsername(username);
         Optional<Patient> existingPatient = patientService.getPatientByEmail(user.getEmail());
         if (existingPatient.isEmpty()) {
-            return ResponseEntity.badRequest().body("You dont have a profile. Make one first.");
+            return ResponseEntity.badRequest().body("You don't have a profile. Make one first.");
         }
 
         Patient oldPatient = existingPatient.get();
@@ -194,8 +196,12 @@ public class PatientController {
 
     // 5. Update Appointment
     @PutMapping("/updateAppointment/{appointmentId}")
-    public ResponseEntity<Appointment> updateAppointment(@PathVariable Long appointmentId, @RequestBody AppointmentRequest updatedAppointment) {
-        return ResponseEntity.ok(patientService.updateAppointment(appointmentId, updatedAppointment));
+    public ResponseEntity<Appointment> updateAppointment(@PathVariable Long appointmentId, @RequestBody AppointmentRequest appointmentRequest) {
+        Appointment updatedAppointment = patientService.updateAppointment(appointmentId, appointmentRequest);
+
+        notificationService.sendUpdatedAppointmentNotificationToPatient(updatedAppointment);
+
+        return ResponseEntity.ok(updatedAppointment);
     }
 
     // 6. Cancel Appointment

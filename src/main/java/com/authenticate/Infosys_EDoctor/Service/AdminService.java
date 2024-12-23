@@ -56,4 +56,6 @@ public interface AdminService {
     WebStatsBetweenDTO getWebStatsBetween(LocalDateTime startDate, LocalDateTime endDate);
 
     List<WebStatsDTO> getWebStats();
+
+    Admin getAdminById(String adminId);
 }

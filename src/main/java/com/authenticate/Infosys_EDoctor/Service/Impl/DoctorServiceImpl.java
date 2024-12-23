@@ -44,8 +44,6 @@ public class DoctorServiceImpl implements DoctorService {
         doctor.setDoctorId(id);
         Doctor savedDoc = doctorRepository.save(doctor);
 
-        //notificationService.sendDoctorProfileCreatedNotification(savedDoc.getEmail(), savedDoc.getDoctorId());
-
         return savedDoc;
     }
 
