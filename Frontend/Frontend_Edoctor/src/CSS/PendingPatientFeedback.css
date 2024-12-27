@@ -1,0 +1,96 @@
+/* Basic styling for the pending feedback page */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.pending-feedback {
+  margin: 20px auto;
+  max-width: 90%;
+  background-color: rgba(244, 247, 246, 0.9); /* Adding transparency to background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading for the pending feedback page */
+.pending-feedback h2 {
+  text-align: center;
+  color: #333;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+/* Message when there are no pending feedbacks */
+.pending-feedback p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #777;
+}
+
+/* Feedback table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th,
+table td {
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+table th {
+  background-color: #4caf50;
+  color: white;
+  font-size: 1.2rem;
+}
+
+table td {
+  font-size: 1rem;
+  color: #333;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Input fields for feedback and rating */
+table input[type="text"],
+table input[type="number"] {
+  width: 90%;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+table input[type="text"]:focus,
+table input[type="number"]:focus {
+  border-color: #4caf50;
+}
+
+/* Action button styling */
+button {
+  padding: 6px 15px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+  opacity: 0.9;
+}

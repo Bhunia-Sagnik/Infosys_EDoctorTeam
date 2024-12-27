@@ -1,0 +1,44 @@
+.appointments-page {
+  padding: 20px;
+}
+
+.appointments-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header-links {
+  display: flex;
+  gap: 20px;
+}
+
+.add-appointment-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.add-appointment-btn:hover {
+  background-color: #45a049;
+}
+
+.appointments-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.appointments-table th,
+.appointments-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.appointments-table th {
+  background-color: #f4f4f4;
+}

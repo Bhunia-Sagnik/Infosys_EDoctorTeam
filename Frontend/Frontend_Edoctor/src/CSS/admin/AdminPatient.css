@@ -1,0 +1,235 @@
+.admin-add-patient-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 800px; /* Set a max-width to prevent covering the entire page */
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  border-color: #1abc9c;
+  box-shadow: 0 0 4px rgba(26, 188, 156, 0.5);
+}
+
+h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.check-profile-section {
+  margin-bottom: 20px;
+}
+
+.check-profile-section input {
+  width: calc(100% - 120px); /* Reduce width to leave space for the button */
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.check-profile-section button {
+  padding: 8px 12px;
+  background-color: #2c3e50;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.check-profile-section button:hover {
+  background-color: #1abc9c;
+}
+
+.add-profile-section {
+  margin-top: 20px;
+}
+
+.add-profile-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.add-profile-section form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-profile-section label {
+  font-weight: bold;
+}
+
+.add-profile-section input,
+.add-profile-section select,
+.add-profile-section textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.add-profile-section textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.add-profile-section input[type="number"] {
+  width: 50%; /* Set width of age input to 50% */
+}
+
+.add-profile-section button {
+  padding: 8px 12px;
+  background-color: #2c3e50;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-start; /* Align button to the left */
+}
+
+.add-profile-section button:hover {
+  background-color: #1abc9c;
+}
+
+.patient-page {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.patient-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.patient-page-header h1 {
+  color: #2c3e50;
+  margin: 0;
+}
+
+.patient-page-header a {
+  text-decoration: none;
+  color: white;
+  background-color: #2c3e50;
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.patient-page-header a:hover {
+  background-color: #1abc9c;
+}
+
+.patient-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.patient-table th,
+.patient-table td {
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.patient-table th {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.patient-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.patient-table tr:hover {
+  background-color: #e8f5e9;
+}
+
+button {
+  width: 100%;
+  padding: 8px 12px;
+  background-color: #2c3e50;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #1abc9c;
+}
+
+button + button {
+  margin-left: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type="text"]:focus,
+input[type="email"]:focus {
+  outline: none;
+  border-color: #1abc9c;
+  box-shadow: 0 0 4px rgba(26, 188, 156, 0.5);
+}
+.age input {
+  width: 100%;
+}

@@ -1,0 +1,105 @@
+/* General Reset */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+  background-color: #a3dbe5; /* Light blue background */
+  min-height: 100vh;
+}
+
+/* Header Section */
+.dashboard-header {
+  text-align: center;
+  background-color: #2c3e50; /* Dark blue header */
+  color: white;
+  padding: 20px 0;
+}
+
+.dashboard-header h1{
+  color: white;
+}
+
+.dashboard-header h1 {
+  margin: 0;
+}
+
+/* Navigation Bar */
+.dashboard-navbar {
+  background-color: #34495e; /* Navbar background */
+  padding: 10px 0;
+}
+
+.dashboard-navbar ul {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Ensures vertical alignment */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard-navbar ul li {
+  margin: 0 20px;
+  position: relative;
+}
+
+.dashboard-navbar ul li a,
+.dashboard-navbar ul li span {
+  text-decoration: none;
+  color: #ffffff; /* White text */
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
+}
+
+.dashboard-navbar ul li a:hover,
+.dashboard-navbar ul li span:hover {
+  background-color: #2c3e50; /* Slightly darker background */
+  color: #ffffff;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background-color: #67838f; /*White dropdown background */
+  border: 1px solid #ddd;
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  min-width: 200px;
+}
+
+.dropdown-menu li {
+  margin: 0;
+}
+
+.dropdown-menu li a {
+  display: block;
+  text-decoration: none;
+  color: #2c3e50; /* Dark text for links */
+  padding: 8px 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #2c3e50; /* Dark hover background */
+  color: #ffffff; /* White text */
+}
+
+/* Dropdown Toggle */
+.dropdown-toggle {
+  cursor: pointer;
+  display: inline-block;
+}

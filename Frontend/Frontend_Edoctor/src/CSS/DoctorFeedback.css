@@ -1,0 +1,68 @@
+.feedback-container {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-container h2 {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #2c3e50; /* Dark gray color */
+}
+
+.avg-rating {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #2c3e50; /* Dark gray color */
+}
+
+.feedback-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+
+.feedback-table th,
+.feedback-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+  color: #2c3e50; /* Dark gray color */
+}
+
+.feedback-table th {
+  background-color: #f1f1f1;
+  font-weight: bold;
+}
+
+.feedback-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.feedback-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.error {
+  color: red;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+/* Custom styling for the stars */
+.feedback-table td,
+.avg-rating {
+  font-size: 18px;
+  color: #f39c12; /* Star color */
+}
+
+.feedback-table td {
+  text-align: center; /* Center the stars in the table */
+}
+
+.avg-rating {
+  font-size: 20px;
+  font-weight: bold;
+}

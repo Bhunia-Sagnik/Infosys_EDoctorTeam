@@ -1,0 +1,69 @@
+/* AdminDeleteDoctor Component Styling */
+.doctor-page {
+  margin: 20px auto;
+  padding: 30px;
+  max-width: 800px; /* Set max-width to avoid covering the entire page */
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.doctor-page h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Input Field Styling */
+.doctor-page input {
+  width: calc(100% - 20px); /* Ensure the input doesn't cover the entire page */
+  padding: 10px;
+  margin-bottom: 20px; /* Add margin for spacing */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.doctor-page button {
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+  width: 100%; /* Ensure the button spans the full width of the form */
+}
+
+.doctor-page button:hover {
+  background-color: #c82333;
+}
+
+.doctor-page button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .doctor-page {
+    padding: 20px;
+  }
+
+  .doctor-page h1 {
+    font-size: 1.8rem;
+  }
+
+  .doctor-page input {
+    padding: 8px;
+    margin-bottom: 15px; /* Reduce space between input fields */
+  }
+
+  .doctor-page button {
+    padding: 10px 15px;
+    font-size: 1rem;
+  }
+}

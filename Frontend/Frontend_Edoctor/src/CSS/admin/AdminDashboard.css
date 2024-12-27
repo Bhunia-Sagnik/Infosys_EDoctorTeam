@@ -1,0 +1,265 @@
+/* General styles for the admin dashboard container */
+body {
+  overflow: auto;
+}
+
+.dashboard-container {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: all 0.3s ease; /* Smooth transition for the background blur */
+}
+
+/* Header section */
+.dashboard-header {
+  text-align: center;
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px;
+}
+
+.dashboard-header h1 {
+  color: white;
+}
+
+/* Navbar styling */
+.dashboard-navbar {
+  background-color: #34495e;
+  padding: 10px 0;
+}
+
+.dashboard-navbar ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard-navbar ul li {
+  margin: 0 15px;
+}
+
+.dashboard-navbar ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.dashboard-navbar ul li a:hover {
+  background-color: #16a085;
+}
+
+.dashboard-navbar ul li button {
+  background-color: transparent;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.dashboard-navbar ul li button:hover {
+  background-color: #1abc9c;
+}
+
+/* Background image styling below the navbar */
+.dashboard-content {
+  background-image: url("/public/images/bg3.jpg"); /* Replace with the correct path */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh; /* Ensures the background image covers the entire section */
+  padding: 30px;
+  color: white; /* To ensure text visibility */
+  text-align: center;
+}
+
+.dashboard-content h2 {
+  margin-top: 50px;
+}
+
+.dashboard-content p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* Preformatted text styles */
+.dashboard-content pre {
+  font-size: 16px;
+  color: #ecf0f1;
+  font-family: "Courier New", Courier, monospace;
+  text-align: left;
+  display: inline-block;
+  margin: 20px 0;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+}
+
+/* Style for the dropdown menu */
+.dashboard-navbar .dropdown-menu {
+  display: block; /* Ensures the dropdown is visible when toggled */
+  position: absolute;
+  background-color: #e2f1f9; /* Light blue background for the dropdown */
+  min-width: 160px; /* Minimum width for dropdown items */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Shadow for better visibility */
+  z-index: 1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dashboard-navbar .dropdown-menu li {
+  white-space: nowrap; /* Ensures options stay on one line */
+  padding: 8px 12px;
+}
+
+.dashboard-navbar .dropdown-menu li a {
+  text-decoration: none;
+  color: black;
+  display: block;
+  padding: 8px 8px;
+}
+
+.dashboard-navbar .dropdown-menu li a:hover {
+  background-color: #16a085; /* Dark green hover color */
+  color: white;
+}
+
+.dashboard-navbar button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Arrow icon for the dropdown */
+.dashboard-navbar .arrow {
+  margin-left: 2px;
+}
+
+/* Show dropdown when open */
+.dashboard-navbar .dropdown-menu {
+  display: block;
+}
+
+/* Add this to your AdminDashboard.css file */
+
+/* Blur effect for background */
+.dashboard-container.blur-background {
+  filter: blur(5px);
+  pointer-events: none; /* Prevent clicking on elements while verifying */
+}
+
+/* Admin ID input container */
+.admin-id-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  text-align: center;
+}
+
+.admin-id-container input {
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.admin-id-container button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.admin-id-container button:hover {
+  background-color: #0056b3;
+}
+
+/* Blur background effect on the container when admin is not verified */
+.dashboard-container.blur-background {
+  filter: blur(5px);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+/* Admin Verification Container */
+.verification-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+}
+
+.verification-container h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+.verification-container input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.verification-container button {
+  width: 100%;
+  padding: 12px;
+  background-color: #16a085;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.verification-container button:hover {
+  background-color: #13856c;
+}
+
+/* Add subtle animation to make the verification container stand out */
+.verification-container {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}

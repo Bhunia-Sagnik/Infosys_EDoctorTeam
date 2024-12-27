@@ -1,0 +1,70 @@
+body {
+  background-image: url("/public/images/background1.jpg"); /* Replace with your image URL */
+  background-size: cover; /* Make the background image cover the entire page */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat;
+}
+.availability-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table th,
+table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+table th {
+  background-color: #2c3e50;
+  color: white;
+}
+input[type="date"] {
+  width: 100%;
+}
+
+button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  width: 50%;
+}
+
+button:hover {
+  background-color: #1abc9c;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+}

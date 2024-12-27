@@ -1,0 +1,47 @@
+/* Styling for the dashboard content */
+.dashboard-content {
+  background-image: url("/public/images/bg3.jpg"); /* Replace with the correct path */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh; /* Ensures the background image covers the entire section */
+  padding: 30px;
+  color: rgb(255, 255, 255); /* To ensure text visibility */
+  text-align: center;
+}
+
+/* Styling for the heading */
+.dashboard-content h2 {
+  margin-top: 50px;
+  font-size: 32px;
+  font-weight: 600;
+  color: #053638;
+  margin-bottom: 20px;
+}
+
+/* Styling for the paragraph text */
+.dashboard-content p {
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: #0b0b0b;
+}
+
+/* Styling for the <pre> tag to align it with the rest of the content */
+.dashboard-content pre {
+  font-size: 18px;
+  white-space: pre-wrap; /* Makes the text wrap within the container */
+  word-wrap: break-word; /* Ensures long lines break correctly */
+  margin: 20px 0;
+  color: #000000; /* Matching the color with other text */
+  font-family: "Courier New", Courier, monospace;
+  line-height: 1.6;
+  background-color: rgba(
+    255,
+    253,
+    253,
+    0.6
+  ); /* A light background to contrast the text */
+  padding: 15px;
+  border-radius: 8px;
+}

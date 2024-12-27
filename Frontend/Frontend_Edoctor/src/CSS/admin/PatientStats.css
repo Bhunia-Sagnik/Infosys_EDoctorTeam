@@ -1,0 +1,105 @@
+.patient-stats-container {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.patient-stats-container h2 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.patient-stats-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.patient-stats-table th,
+.patient-stats-table td {
+  text-align: left;
+  padding: 12px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.patient-stats-table th {
+  background-color: #2c3e50;
+  color: white;
+}
+
+.patient-stats-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.patient-stats-table tr:hover {
+  background-color: #e8f5e9;
+}
+
+.patient-stats-table td {
+  color: #34495e;
+}
+
+.patient-stats-table .paid {
+  color: #27ae60; /* Green for paid */
+}
+
+.patient-stats-table .not-paid {
+  color: #e74c3c; /* Red for not paid */
+}
+
+.patient-stats-table .pending {
+  color: #f39c12; /* Yellow for pending */
+}
+
+.patient-stats-table .cancelled {
+  color: #8e44ad; /* Purple for cancelled */
+}
+
+.patient-stats-table td[colspan="8"] {
+  text-align: center;
+  font-size: 16px;
+  color: #888;
+}
+
+.patient-stats-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.patient-stats-actions button {
+  padding: 10px 20px;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.patient-stats-actions button:hover {
+  background-color: #1abc9c;
+}
+
+.patient-stats-actions select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.patient-stats-actions select:focus {
+  outline: none;
+  border-color: #1abc9c;
+  box-shadow: 0 0 4px rgba(26, 188, 156, 0.5);
+}

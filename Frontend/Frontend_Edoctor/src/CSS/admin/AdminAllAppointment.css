@@ -1,0 +1,110 @@
+/* Container for the entire admin appointments page */
+.admin-all-appointments {
+    margin: 20px auto;
+    padding: 30px;
+    max-width: 1200px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .admin-all-appointments h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Style for the appointments table */
+  .appointments-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Style for table headers */
+  .appointments-table th {
+    background-color: #2c3e50;
+    color: white;
+    padding: 12px 20px;
+    text-align: left;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+  }
+  
+  /* Style for table data */
+  .appointments-table td {
+    padding: 12px 20px;
+    text-align: left;
+    font-size: 1rem;
+    color: #555;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Hover effect for table rows */
+  .appointments-table tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+  
+  /* Style for empty data message */
+  .appointments-table td[colspan] {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+    padding: 20px 0;
+  }
+  
+  /* Style for action buttons */
+  .update-btn, .delete-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: 10px;
+  }
+  
+  .update-btn {
+    background-color: #28a745;
+  }
+  
+  .delete-btn {
+    background-color: #dc3545;
+  }
+  
+  /* Hover effect for buttons */
+  .update-btn:hover {
+    background-color: #218838;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c82333;
+  }
+  
+  /* Style for the delete button on focus */
+  .update-btn:focus, .delete-btn:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  /* Responsive styling */
+  @media (max-width: 768px) {
+    .appointments-table th,
+    .appointments-table td {
+      padding: 10px 15px;
+      font-size: 0.9rem;
+    }
+  
+    .admin-all-appointments h2 {
+      font-size: 1.8rem;
+    }
+  }
+  

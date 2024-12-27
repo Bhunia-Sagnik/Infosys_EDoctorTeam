@@ -1,0 +1,146 @@
+/* Set background image covering entire page */
+.find-doctors-page {
+  background-image: url("/public/images/background1.jpg"); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: white; /* Text color to ensure readability on dark background */
+  font-family: Arial, sans-serif;
+}
+
+/* Style the header */
+.find-doctors-page h2 {
+  margin-top: 20px;
+  font-size: 2rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Container for buttons and input fields */
+.fetch-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  padding: 20px;
+  width: 80%;
+  max-width: 600px;
+}
+
+/* Button styles */
+button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+button:hover {
+  background-color: #45a049;
+}
+
+/* Input field styles */
+.search-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  width: 100%;
+}
+
+input {
+  padding: 10px;
+  width: 80%;
+  margin-top: 5px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+}
+
+/* Doctor cards container */
+.doctor-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 40px;
+  width: 80%;
+}
+
+/* Style for individual doctor cards */
+.doctor-card {
+  background-color: white;
+  padding: 20px;
+  margin: 15px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.doctor-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: black;
+}
+
+.doctor-card p {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+.doctor-card button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for Get Details button */
+.doctor-card button:hover {
+  background-color: #45a049;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .find-doctors-page {
+    padding: 20px;
+  }
+
+  .fetch-options {
+    width: 100%;
+  }
+
+  .doctor-cards-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .doctor-card {
+    width: 90%;
+  }
+}
+
+.reset-search button{
+  size: 20px;
+  background-color: #2c3e50;
+}
+
+.reset-search :hover {
+  background-color: #34495e;
+}

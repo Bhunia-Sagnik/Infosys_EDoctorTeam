@@ -1,0 +1,90 @@
+/* Admin Update Appointment Page Styling */
+.admin-update-appointment {
+  margin: 30px auto;
+  padding: 20px;
+  max-width: 600px; /* Reduced max-width for a more compact layout */
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.admin-update-appointment h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #333;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Styling the appointment form */
+.appointment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Reduce gap between form fields */
+}
+
+.appointment-form label {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+/* Input fields styling */
+.appointment-form input,
+.appointment-form textarea {
+  padding: 8px; /* Reduced padding for smaller input fields */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem; /* Slightly smaller font size */
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Specific styles for the textarea */
+.appointment-form textarea {
+  resize: vertical;
+  height: 80px; /* Reduced height for the textarea */
+}
+
+/* Button styling */
+.appointment-form button {
+  padding: 10px 18px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem; /* Slightly smaller font size */
+  transition: background-color 0.3s ease;
+}
+
+.appointment-form button:hover {
+  background-color: #218838;
+}
+
+.appointment-form button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admin-update-appointment {
+    padding: 15px;
+  }
+
+  .admin-update-appointment h2 {
+    font-size: 1.6rem;
+  }
+
+  .appointment-form label {
+    font-size: 0.9rem;
+  }
+
+  .appointment-form input,
+  .appointment-form textarea,
+  .appointment-form button {
+    font-size: 0.85rem;
+  }
+}

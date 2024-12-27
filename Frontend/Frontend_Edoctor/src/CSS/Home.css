@@ -1,0 +1,131 @@
+/* Home.css */
+
+/* Full-page container */
+.body1 {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: url("/public/images/bg1.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Main container for the page */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #333;
+}
+
+/* Hero section styling */
+.hero-section {
+  background: url("/public/images/bg2.jpg") repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 50px;
+  width: 50%;
+  max-width: 600px;
+  max-height: 300px;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+  font-weight: bolder;
+  color: #333;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 50px;
+  color: #555;
+  font-weight: bold;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.hero-buttons .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  width: 50%;
+  font-size: 1rem;
+  color: white;
+  background-color: #28a745; /* Green color */
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hero-buttons .btn:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+.hero-buttons .btn.btn-outline {
+  background-color: transparent;
+  color: #28a745;
+  border: 2px solid #28a745;
+}
+
+.hero-buttons .btn.btn-outline:hover {
+  background-color: #28a745;
+  color: white;
+}
+
+/* Features section styling */
+.features-section {
+  margin-top: 6.4%;
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  background-color: #41c4f0; /* Blue background */
+  color: white;
+  border-radius: 15px;
+}
+
+.features-section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.feature {
+  background-color: white;
+  color: #333;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  flex: 1 1 250px; /* Ensures responsiveness */
+  max-width: 300px;
+}
+
+.feature h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.feature p {
+  font-size: 1rem;
+  color: #555;
+}
+
