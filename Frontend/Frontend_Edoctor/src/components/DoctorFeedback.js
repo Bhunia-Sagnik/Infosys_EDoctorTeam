@@ -81,7 +81,7 @@ function DoctorFeedback() {
               {feedbacks.map((feedback) => (
                 <tr key={feedback.id}>
                   <td>{feedback.patient.patientId}</td>
-                  <td>{renderStars(feedback.rating)}</td>
+                  <td className="rating-stars">{renderStars(feedback.rating)}</td>
                   <td>{feedback.feedbackText}</td>
                 </tr>
               ))}

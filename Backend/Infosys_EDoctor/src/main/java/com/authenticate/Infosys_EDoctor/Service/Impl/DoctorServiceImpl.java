@@ -76,8 +76,8 @@ public class DoctorServiceImpl implements DoctorService {
         if (updatedDoctor.getMobileNo() != null && !updatedDoctor.getMobileNo().isEmpty()) {
             existingDoctor.setMobileNo(updatedDoctor.getMobileNo());
         }
-        if (updatedDoctor.getEmail() != null && !updatedDoctor.getEmail().isEmpty()) {
-            existingDoctor.setEmail(updatedDoctor.getEmail());
+        if(updatedDoctor.getChargedPerVisit() != 0) {
+            existingDoctor.setChargedPerVisit(updatedDoctor.getChargedPerVisit());
         }
 
         // Save and return the updated doctor

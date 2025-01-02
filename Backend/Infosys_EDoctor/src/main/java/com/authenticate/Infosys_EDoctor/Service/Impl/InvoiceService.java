@@ -94,7 +94,7 @@ public class InvoiceService {
 
             // Table Headers
             PdfPCell header1 = new PdfPCell(new Phrase("Description", contentFont));
-            PdfPCell header2 = new PdfPCell(new Phrase("Amount (₹)", contentFont));
+            PdfPCell header2 = new PdfPCell(new Phrase("Amount (Rs.)", contentFont));
             header1.setHorizontalAlignment(Element.ALIGN_CENTER);
             header2.setHorizontalAlignment(Element.ALIGN_CENTER);
             feeTable.addCell(header1);
@@ -125,7 +125,7 @@ public class InvoiceService {
             document.add(feeTable);
 
 
-            document.add(new Paragraph("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"));
+            document.add(new Paragraph("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"));
 
 
             // Footer

@@ -57,7 +57,7 @@ function AdminAddAppointment() {
 
   return (
     <div className="add-appointment">
-      <h2>Add Appointment (Admin)</h2>
+      <h2>Add Appointment</h2>
       <form className="appointment-form" onSubmit={(e) => e.preventDefault()}>
         <label>Patient ID:</label>
         <input

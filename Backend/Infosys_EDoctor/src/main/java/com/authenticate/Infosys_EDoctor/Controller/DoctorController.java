@@ -75,7 +75,7 @@ public class DoctorController {
     public ResponseEntity<?> updateDoctor(@RequestBody Doctor doctor, @PathVariable String username) {
         // Check if the doctor is logged in
         if (username == null) {
-            return ResponseEntity.status(403).body("You must be logged in to add a profile.");
+            return ResponseEntity.status(403).body("You must be logged in to update a profile.");
         }
 
         // Check if profile already exists

@@ -8,12 +8,14 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.doctor-page h1 {
+.admin-delete-appointment h2 {
+  margin-top: 20px;
   text-align: center;
   font-size: 2rem;
   margin-bottom: 20px;
   color: #333;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 40px;
 }
 
 /* Input Field Styling */

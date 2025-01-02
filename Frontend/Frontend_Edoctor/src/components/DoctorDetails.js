@@ -69,27 +69,27 @@ function DoctorDetails() {
     <div className="doctor-details-page">
       {doctor && (
         <>
-          <h2>Doctor Details</h2>
-          <div className="doctor-details-card">
-            <h3>Dr. {doctor.name}</h3>
-            <p><strong>Specialization:</strong> {doctor.specialization}</p>
-            <p><strong>Location:</strong> {doctor.location}</p>
-            <p><strong>Hospital:</strong> {doctor.hospitalName}</p>
-            <p><strong>Charge Per Visit:</strong> ₹{doctor.chargedPerVisit}</p>
-            <h4>Available Dates: </h4>
-            {availableDates.length > 0 ? (
-              <ul>
-                {availableDates.map((date) => (
-                  <li key={date.availabilityId}>
-                    {new Date(date.fromDate).toLocaleDateString()} to {new Date(date.endDate).toLocaleDateString()}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>No available dates.</p>
-            )}
+          <h2>Dr. {doctor.name}</h2>
+          <p><strong>Specialization:</strong> {doctor.specialization}</p>
+          <p><strong>Location:</strong> {doctor.location}</p>
+          <p><strong>Hospital:</strong> {doctor.hospitalName}</p>
+          <p><strong>Charge Per Visit:</strong> ₹{doctor.chargedPerVisit}</p>
+          <h3>Available Dates: </h3>
+          {availableDates.length > 0 ? (
+            <ul>
+              {availableDates.map((date) => (
+                <li key={date.availabilityId}>
+                  {new Date(date.fromDate).toLocaleDateString()} to {new Date(date.endDate).toLocaleDateString()}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No available dates.</p>
+          )}
 
-            <h4>Schedule Appointment</h4>
+          <div className="doctor-details-card">
+
+            <h3>Schedule Appointment</h3>
             <input
               type="date"
               value={appointmentDate}

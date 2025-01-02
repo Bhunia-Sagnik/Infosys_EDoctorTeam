@@ -61,7 +61,7 @@
     margin-bottom: 8px;
   }
   
-  .doctor-details-card ul li::before {
+  .doctor-details-page ul li::before {
     content: '✔️';
     color: #27ae60;
     margin-right: 10px;

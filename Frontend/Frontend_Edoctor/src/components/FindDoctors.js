@@ -12,13 +12,35 @@ function FindDoctors() {
   const [showSearchOptions, setShowSearchOptions] = useState(true);
   const username = localStorage.getItem("username");
 
-  // Fetch all doctors
+  // Fetch feedback for a single doctor
+  const fetchFeedback = async (doctorId) => {
+    try {
+      const response = await axios.get(
+        `/${username}/feedback/doctorAvg/${doctorId}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching feedback:", error);
+      return null;
+    }
+  };
+
+  // Fetch all doctors and their feedback
   const fetchAllDoctors = async () => {
     setErrors({});
     try {
       const response = await axios.get(`/${username}/patient/findDoctors`);
-      setDoctors(response.data);
-      setFilteredDoctors(response.data);
+      const doctorsData = response.data;
+
+      // Fetch feedback for each doctor
+      const feedbackPromises = doctorsData.map(async (doctor) => {
+        const avgFeedback = await fetchFeedback(doctor.doctorId);
+        return { ...doctor, avgFeedback };
+      });
+
+      const doctorsWithFeedback = await Promise.all(feedbackPromises);
+      setDoctors(doctorsWithFeedback);
+      setFilteredDoctors(doctorsWithFeedback);
       setShowSearchOptions(false);
     } catch (error) {
       console.error("Error fetching all doctors:", error);
@@ -40,12 +62,17 @@ function FindDoctors() {
       const response = await axios.get(
         `/${username}/patient/findDoctorsByName?doctorName=${searchName}`
       );
-      if (response.data && response.data.length > 0) {
-        setFilteredDoctors(response.data);
-        setShowSearchOptions(false);
-      } else {
-        alert("No doctors found for the given name.");
-      }
+      const doctorsData = response.data;
+
+      // Fetch feedback for each doctor
+      const feedbackPromises = doctorsData.map(async (doctor) => {
+        const avgFeedback = await fetchFeedback(doctor.doctorId);
+        return { ...doctor, avgFeedback };
+      });
+
+      const doctorsWithFeedback = await Promise.all(feedbackPromises);
+      setFilteredDoctors(doctorsWithFeedback);
+      setShowSearchOptions(false);
     } catch (error) {
       console.error("Error fetching doctor by name:", error);
       alert("Failed to fetch doctor details. Please try again later.");
@@ -66,12 +93,17 @@ function FindDoctors() {
       const response = await axios.get(
         `/${username}/patient/findDoctorsBySpecialization?specialization=${searchSpecialization}`
       );
-      if (response.data && response.data.length > 0) {
-        setFilteredDoctors(response.data);
-        setShowSearchOptions(false);
-      } else {
-        alert("No doctors found for the selected specialization.");
-      }
+      const doctorsData = response.data;
+
+      // Fetch feedback for each doctor
+      const feedbackPromises = doctorsData.map(async (doctor) => {
+        const avgFeedback = await fetchFeedback(doctor.doctorId);
+        return { ...doctor, avgFeedback };
+      });
+
+      const doctorsWithFeedback = await Promise.all(feedbackPromises);
+      setFilteredDoctors(doctorsWithFeedback);
+      setShowSearchOptions(false);
     } catch (error) {
       console.error("Error fetching doctors by specialization:", error);
       alert("Failed to fetch doctors. Please try again later.");
@@ -84,6 +116,25 @@ function FindDoctors() {
     setSearchName("");
     setSearchSpecialization("");
     setFilteredDoctors([]);
+  };
+
+  const renderStars = (rating) => {
+    const fullStars = Math.floor(rating);
+    const halfStars = rating % 1 !== 0;
+    const emptyStars = 5 - Math.ceil(rating);
+
+    let stars = "";
+    for (let i = 0; i < fullStars; i++) {
+      stars += "★";
+    }
+    if (halfStars) {
+      stars += "✩"; // Half star
+    }
+    for (let i = 0; i < emptyStars; i++) {
+      stars += "☆";
+    }
+
+    return stars;
   };
 
   return (
@@ -147,6 +198,11 @@ function FindDoctors() {
               <p>
                 <strong>Charge Per Visit:</strong> ₹{doctor.chargedPerVisit}
               </p>
+              <div>
+                {doctor.avgFeedback !== null
+                  ? <p className="feedback-stars">{renderStars(doctor.avgFeedback)}</p>
+                  : "No feedbacks available"}
+              </div>
               <Link to={`/doctor-details/${doctor.doctorId}`}>
                 <button>Get Details</button>
               </Link>

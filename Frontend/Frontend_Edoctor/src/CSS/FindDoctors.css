@@ -144,3 +144,9 @@ input {
 .reset-search :hover {
   background-color: #34495e;
 }
+
+.feedback-stars {
+  color: gold;
+  font-weight: bold;
+  font-size: 2rem;
+}
