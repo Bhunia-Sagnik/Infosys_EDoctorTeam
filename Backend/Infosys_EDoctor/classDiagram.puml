@@ -1,0 +1,14 @@
+@startuml
+class Person {
+    +String name
+    +int age
+    +greet()
+}
+
+class Employee {
+    +String jobTitle
+    +work()
+}
+
+Person <|-- Employee
+@enduml

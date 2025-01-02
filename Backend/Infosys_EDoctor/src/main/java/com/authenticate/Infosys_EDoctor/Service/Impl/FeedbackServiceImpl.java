@@ -45,5 +45,6 @@ public class FeedbackServiceImpl implements FeedbackService {
     public Double getAvgFeedbackByDoctor(String doctorId) {
         return feedbackRepository.findAverageRatingByDoctorId(doctorId);
     }
+
 }
 

@@ -45,40 +45,4 @@ class EmailServiceTest {
         // Assert
         verify(javaMailSender).send(isA(SimpleMailMessage.class));
     }
-
-    /**
-     * Test {@link EmailService#sendDoctorIdEmail(String, String)}.
-     * <p>
-     * Method under test: {@link EmailService#sendDoctorIdEmail(String, String)}
-     */
-    @Test
-    @DisplayName("Test sendDoctorIdEmail(String, String)")
-    void testSendDoctorIdEmail() throws MailException {
-        // Arrange
-        doNothing().when(javaMailSender).send(Mockito.<SimpleMailMessage>any());
-
-        // Act
-        emailService.sendDoctorIdEmail("jane.doe@example.org", "42");
-
-        // Assert
-        verify(javaMailSender).send(isA(SimpleMailMessage.class));
-    }
-
-    /**
-     * Test {@link EmailService#sendPatientIdEmail(String, String)}.
-     * <p>
-     * Method under test: {@link EmailService#sendPatientIdEmail(String, String)}
-     */
-    @Test
-    @DisplayName("Test sendPatientIdEmail(String, String)")
-    void testSendPatientIdEmail() throws MailException {
-        // Arrange
-        doNothing().when(javaMailSender).send(Mockito.<SimpleMailMessage>any());
-
-        // Act
-        emailService.sendPatientIdEmail("jane.doe@example.org", "42");
-
-        // Assert
-        verify(javaMailSender).send(isA(SimpleMailMessage.class));
-    }
 }

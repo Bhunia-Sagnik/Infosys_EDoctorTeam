@@ -70,6 +70,22 @@ public class FeedbackController {
         return ResponseEntity.ok(feedbackList);
     }
 
+    @GetMapping("/doctorAvg/{doctorId}")
+    public ResponseEntity<?> getAvgFeedbackByDoctorId(@PathVariable String username, @PathVariable String doctorId) {
+        // Check if the doctor is logged in
+        if (username == null) {
+            return ResponseEntity.status(403).body("You must be logged in to add a profile.");
+        }
+
+        // Check if profile already exists
+        User user = userService.getUserByUsername(username);
+        Patient existingPatient = patientService.getPatientByEmail(user.getEmail())
+                .orElseThrow(() -> new RuntimeException("You don't have a profile. Make one first."));
+
+        Double avgFeedback = feedbackService.getAvgFeedbackByDoctor(doctorId);
+        return ResponseEntity.ok(avgFeedback);
+    }
+
     @GetMapping("/doctorAvg")
     public ResponseEntity<?> getAvgFeedbackForDoctor(@PathVariable String username) {
         // Check if the doctor is logged in
