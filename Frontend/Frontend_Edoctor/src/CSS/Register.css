@@ -1,21 +1,25 @@
-/* Register.css */
-
-body {
+body.register-page {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: url("/public/images/background1.jpg") no-repeat center center
-    fixed;
+  background: url("/public/images/register-bg.jpg") no-repeat center center fixed;
   background-size: cover;
+  width: 220vh;
+  height: 100vh;
+  display: flex; /* Centers the content vertically and horizontally */
+  align-items: center;
+  justify-content: center;
 }
 
 .register-container {
-  width: 400px;
-  margin: 0% 70% 0% 40%; /* 2nd right 3rd bottom*/
-  padding: 40px;
-  background: rgba(224, 227, 231, 0.9);
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 450px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.7); /* Medium transparency (70% opaque) */
+  text-align: left;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1; 
 }
 
 .register-container h1 {
@@ -23,42 +27,44 @@ body {
   color: #333;
 }
 
-.form-group {
+.register-container .form-group {
   margin-bottom: 15px;
 }
 
-label {
+.register-container label {
   display: block;
   margin-bottom: 5px;
   color: #555;
 }
 
-select {
+.register-container select {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
 }
-.form-group1 input {
-  width: 100%;
+
+.register-container .form-group1 input {
+  width: 25rem;
   padding: 10px;
 }
 
-input.error,
-select.error {
+.register-container input.validation-error,
+.register-container select.error {
   border-color: #e74c3c;
+  box-shadow: 0 0 5px #e74c3c;
 }
 
-.error-text {
+.register-container .error-text {
   color: #e74c3c;
   font-size: 12px;
 }
 
-button {
+.register-container .btn-primary {
   width: 100%;
   padding: 10px;
-  background: #3498db;
+  background: #2c3e50;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -66,11 +72,26 @@ button {
   font-size: 16px;
 }
 
-button:disabled {
+.register-container button:disabled {
   background: #95a5a6;
   cursor: not-allowed;
 }
 
-button:hover:not(:disabled) {
-  background: #2980b9;
+.register-container button:hover:not(:disabled) {
+  background: green;
 }
+
+.register-container .regsiter-footer {
+  margin-top: 1rem;
+}
+
+.register-container .login-link {
+  color: #551a8b;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.register-container .login-link:hover {
+  text-decoration: underline;
+}
+

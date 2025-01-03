@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../CSS/Home.css"; // Updated CSS for the landing page
+import "../CSS/Home.css";
 
 function Home() {
   return (
-    <div className="body1">
+    <body className="home-page">
       <div className="home-container">
         <header className="hero-section">
           <div className="hero-content">
-            <h1>Welcome to E-Doctor</h1>
+            <h1>Welcome to EDoctor</h1>
             <p>
               Your one-stop solution for managing outpatient appointments
               efficiently.
@@ -24,33 +24,31 @@ function Home() {
           </div>
         </header>
         <section className="features-section">
-          <h2>Why Choose Us?</h2>
+          <h2>Why Choose E-Doctor?</h2>
           <div className="features">
             <div className="feature">
               <h3>Easy Scheduling</h3>
               <p>
-                Schedule appointments with ease, whether you're a doctor or a
-                patient.
+                Quickly schedule and manage your appointments without any
+                hassle.
               </p>
             </div>
             <div className="feature">
               <h3>Seamless Experience</h3>
               <p>
-                Enjoy a smooth and user-friendly interface tailored to your
-                needs.
+                A smooth, intuitive interface tailored to your specific needs.
               </p>
             </div>
             <div className="feature">
-              <h3>Secure Platform</h3>
+              <h3>Data Security</h3>
               <p>
-                Your data is safe with us. Privacy and security are our
-                priorities.
+                We prioritize your privacy and security at every step.
               </p>
             </div>
           </div>
         </section>
       </div>
-    </div>
+    </body>
   );
 }
 

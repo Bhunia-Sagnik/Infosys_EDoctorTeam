@@ -57,6 +57,10 @@
     color: #777;
     margin-top: 20px;
   }
+
+  .feedback-page .rating-stars {
+    color: gold;
+  }
   
   /* Responsive design */
   @media (max-width: 768px) {

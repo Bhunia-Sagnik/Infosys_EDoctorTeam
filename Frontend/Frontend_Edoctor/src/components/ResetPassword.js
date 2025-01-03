@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import api from "../services/api"; // Ensure this is configured correctly
 import "../CSS/ResetPassword.css";
+import validator from "validator";
+
 
 function ResetPassword() {
   const location = useLocation();
@@ -17,16 +19,24 @@ function ResetPassword() {
   // Helper function to validate form inputs
   const validateForm = () => {
     const newErrors = {};
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    if (!otp.trim()) newErrors.otp = "OTP is required.";
-    if (!newPassword) {
-      newErrors.newPassword = "Password is required.";
-    } else if (!passwordRegex.test(newPassword)) {
-      newErrors.newPassword =
-        "Password must be at least 8 characters, include an uppercase, lowercase, number, and special character.";
+    if (validator.isEmpty(otp)) {
+      newErrors.otp = "OTP is required.";
+    } else if (!validator.isLength(otp, { min: 4, max: 4 })) {
+      newErrors.otp = "OTP must be 4 characters long.";
     }
+
+    if (validator.isEmpty(newPassword)) {
+      newErrors.newPassword = "Password is required";
+    } else if (
+      !validator.isLength(newPassword, { min: 8, max: 16 }) ||
+      !/[a-zA-Z]/.test(newPassword) ||
+      !/\d/.test(newPassword)
+    ) {
+      newErrors.newPassword =
+        "Password must be 8-16 characters long and include both letters and digits";
+    }
+
     if (newPassword !== confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match.";
     }
@@ -64,50 +74,52 @@ function ResetPassword() {
   };
 
   return (
-    <div className="reset-password-container">
-      <h1>Reset Password</h1>
-      <form onSubmit={handleResetPassword}>
-        <div className="form-group">
-          <label>OTP:</label>
-          <input
-            type="text"
-            value={otp}
-            onChange={(e) => setOtp(e.target.value)}
-            placeholder="Enter OTP"
-            required
-          />
-          {errors.otp && <p className="error">{errors.otp}</p>}
-        </div>
-        <div className="form-group">
-          <label>New Password:</label>
-          <input
-            type="password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            placeholder="Enter new password"
-            required
-          />
-          {errors.newPassword && <p className="error">{errors.newPassword}</p>}
-        </div>
-        <div className="form-group">
-          <label>Confirm Password:</label>
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="Confirm new password"
-            required
-          />
-          {errors.confirmPassword && (
-            <p className="error">{errors.confirmPassword}</p>
-          )}
-        </div>
-        <button className="btn-primary" type="submit">
-          Reset Password
-        </button>
-      </form>
-      {message && <p className={`message ${messageType}`}>{message}</p>}
-    </div>
+    <body className="reset-password-page">
+      <div className="reset-password-container">
+        <h1>Reset Password</h1>
+        <form onSubmit={handleResetPassword}>
+          <div className="form-group">
+            <label>OTP:</label>
+            <input
+              type="text"
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
+              placeholder="Enter OTP"
+              required
+            />
+            {errors.otp && <p className="error">{errors.otp}</p>}
+          </div>
+          <div className="form-group">
+            <label>New Password:</label>
+            <input
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              placeholder="Enter new password"
+              required
+            />
+            {errors.newPassword && <p className="error">{errors.newPassword}</p>}
+          </div>
+          <div className="form-group">
+            <label>Confirm Password:</label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Confirm new password"
+              required
+            />
+            {errors.confirmPassword && (
+              <p className="error">{errors.confirmPassword}</p>
+            )}
+          </div>
+          <button className="btn-primary" type="submit">
+            Reset Password
+          </button>
+        </form>
+        {message && <p className={`message ${messageType}`}>{message}</p>}
+      </div>
+    </body>
   );
 }
 

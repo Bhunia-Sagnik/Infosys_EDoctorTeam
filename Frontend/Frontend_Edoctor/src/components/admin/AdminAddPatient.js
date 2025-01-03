@@ -116,122 +116,124 @@ function AdminAddPatient() {
   };
 
   return (
-    <div className="admin-add-patient-container">
-      <h2>Admin Add Patient</h2>
+    <body className="admin-add-patient">
+      <div className="admin-add-patient-container">
+        <h2>Admin Add Patient</h2>
 
-      {/* Section to check if a profile exists */}
-      <div className="check-profile-section">
-        <label>Enter Patient Username:</label>
-        <input
-          type="text"
-          value={patientUsername}
-          onChange={(e) => setPatientUsername(e.target.value)}
-        />
-        <button onClick={checkProfile} disabled={loading}>
-          {loading ? "Checking..." : "Check Profile"}
-        </button>
+        {/* Section to check if a profile exists */}
+        <div className="check-profile-section">
+          <label>Enter Patient Username:</label>
+          <input
+            type="text"
+            value={patientUsername}
+            onChange={(e) => setPatientUsername(e.target.value)}
+          />
+          <button onClick={checkProfile} disabled={loading}>
+            {loading ? "Checking..." : "Check Profile"}
+          </button>
+        </div>
+
+        {/* If profile exists, show profile details */}
+        {patientProfile && (
+          <div className="profile-details">
+            <h3>Profile Details</h3>
+            <p>
+              <strong>Name:</strong> {patientProfile.name}
+            </p>
+            <p>
+              <strong>Mobile No:</strong> {patientProfile.mobileNo}
+            </p>
+            <p>
+              <strong>Blood Group:</strong> {patientProfile.bloodGroup}
+            </p>
+            <p>
+              <strong>Gender:</strong> {patientProfile.gender}
+            </p>
+            <p>
+              <strong>Age:</strong> {patientProfile.age}
+            </p>
+            <p>
+              <strong>Address:</strong> {patientProfile.address}
+            </p>
+          </div>
+        )}
+
+        {/* If no profile exists, show the form to add a profile */}
+        {!patientProfile && patientUsername && (
+          <div className="add-profile-section">
+            <h3>Add New Patient Profile</h3>
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label>Name:</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                />
+                {errors.name && <p className="error">{errors.name}</p>}
+              </div>
+              <div>
+                <label>Mobile Number:</label>
+                <input
+                  type="tel"
+                  name="mobileNo"
+                  value={formData.mobileNo}
+                  onChange={handleInputChange}
+                />
+                {errors.mobileNo && <p className="error">{errors.mobileNo}</p>}
+              </div>
+              <div>
+                <label>Blood Group:</label>
+                <input
+                  type="text"
+                  name="bloodGroup"
+                  value={formData.bloodGroup}
+                  onChange={handleInputChange}
+                />
+                {errors.bloodGroup && (
+                  <p className="error">{errors.bloodGroup}</p>
+                )}
+              </div>
+              <div>
+                <label>Gender:</label>
+                <select
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleInputChange}
+                >
+                  <option value="MALE">Male</option>
+                  <option value="FEMALE">Female</option>
+                  <option value="OTHERS">Others</option>
+                </select>
+              </div>
+              <div>
+                <label>Age:</label>
+                <input
+                  type="number"
+                  name="age"
+                  value={formData.age}
+                  onChange={handleInputChange}
+                />
+                {errors.age && <p className="error">{errors.age}</p>}
+              </div>
+              <div>
+                <label>Address:</label>
+                <textarea
+                  name="address"
+                  value={formData.address}
+                  onChange={handleInputChange}
+                />
+                {errors.address && <p className="error">{errors.address}</p>}
+              </div>
+              <button type="submit" disabled={loading}>
+                {loading ? "Adding Profile..." : "Add Profile"}
+              </button>
+            </form>
+          </div>
+        )}
       </div>
-
-      {/* If profile exists, show profile details */}
-      {patientProfile && (
-        <div className="profile-details">
-          <h3>Profile Details</h3>
-          <p>
-            <strong>Name:</strong> {patientProfile.name}
-          </p>
-          <p>
-            <strong>Mobile No:</strong> {patientProfile.mobileNo}
-          </p>
-          <p>
-            <strong>Blood Group:</strong> {patientProfile.bloodGroup}
-          </p>
-          <p>
-            <strong>Gender:</strong> {patientProfile.gender}
-          </p>
-          <p>
-            <strong>Age:</strong> {patientProfile.age}
-          </p>
-          <p>
-            <strong>Address:</strong> {patientProfile.address}
-          </p>
-        </div>
-      )}
-
-      {/* If no profile exists, show the form to add a profile */}
-      {!patientProfile && patientUsername && (
-        <div className="add-profile-section">
-          <h3>Add New Patient Profile</h3>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label>Name:</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-              />
-              {errors.name && <p className="error">{errors.name}</p>}
-            </div>
-            <div>
-              <label>Mobile Number:</label>
-              <input
-                type="tel"
-                name="mobileNo"
-                value={formData.mobileNo}
-                onChange={handleInputChange}
-              />
-              {errors.mobileNo && <p className="error">{errors.mobileNo}</p>}
-            </div>
-            <div>
-              <label>Blood Group:</label>
-              <input
-                type="text"
-                name="bloodGroup"
-                value={formData.bloodGroup}
-                onChange={handleInputChange}
-              />
-              {errors.bloodGroup && (
-                <p className="error">{errors.bloodGroup}</p>
-              )}
-            </div>
-            <div>
-              <label>Gender:</label>
-              <select
-                name="gender"
-                value={formData.gender}
-                onChange={handleInputChange}
-              >
-                <option value="MALE">Male</option>
-                <option value="FEMALE">Female</option>
-                <option value="OTHERS">Others</option>
-              </select>
-            </div>
-            <div>
-              <label>Age:</label>
-              <input
-                type="number"
-                name="age"
-                value={formData.age}
-                onChange={handleInputChange}
-              />
-              {errors.age && <p className="error">{errors.age}</p>}
-            </div>
-            <div>
-              <label>Address:</label>
-              <textarea
-                name="address"
-                value={formData.address}
-                onChange={handleInputChange}
-              />
-              {errors.address && <p className="error">{errors.address}</p>}
-            </div>
-            <button type="submit" disabled={loading}>
-              {loading ? "Adding Profile..." : "Add Profile"}
-            </button>
-          </form>
-        </div>
-      )}
-    </div>
+    </body>
   );
 }
 

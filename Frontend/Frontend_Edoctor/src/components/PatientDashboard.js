@@ -39,70 +39,72 @@ function PatientDashboard() {
   };
 
   return (
-    <div className="dashboard-container">
-      <header className="dashboard-header">
-        <h1>Welcome{patientName ? `, ${patientName}` : " Patient"}!</h1>
-      </header>
+    <body className="patient-dashboard">
+      <div className="patient-dashboard-container">
+        <header className="dashboard-header">
+          <h1>Welcome{patientName ? `, ${patientName}` : " Patient"}!</h1>
+        </header>
 
-      {isLoading ? (
-        <p>Loading profile...</p>
-      ) : (
-        <nav className="dashboard-navbar">
-          <ul>
-            <li>
-              <Link to="/add-patient">Profile</Link>
-            </li>
-            <li>
-              <Link to="/find-doctors">Doctors</Link>
-            </li>
-            <li>
-              <Link to="/patient-appointments">Appointments</Link>
-            </li>
-            <li>
-              <Link to="/payments">Payments</Link>
-            </li>
-            <li>
-              <button onClick={toggleDropdown}>
-                Feedback
-                <span className="arrow">{dropdownOpen ? "▲" : "▼"}</span>
-              </button>
-              {dropdownOpen && (
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link to="/all-patient-feedback">All Feedbacks</Link>
-                  </li>
-                  <li>
-                    <Link to="/pending-patient-feedback">
-                      Pending Feedbacks
-                    </Link>
-                  </li>
-                </ul>
-              )}
-            </li>
-            <li>
-              <button onClick={handleLogout}>Logout</button>
-            </li>
-          </ul>
-        </nav>
-      )}
-      {/* Background Section Below Navbar */}
-      <div className="dashboard-content">
-        <h2>Empowering your wellness, one step at a time!</h2>
+        {isLoading ? (
+          <p>Loading profile...</p>
+        ) : (
+          <nav className="dashboard-navbar">
+            <ul>
+              <li>
+                <Link to="/add-patient">Profile</Link>
+              </li>
+              <li>
+                <Link to="/find-doctors">Doctors</Link>
+              </li>
+              <li>
+                <Link to="/patient-appointments">Appointments</Link>
+              </li>
+              <li>
+                <Link to="/payments">Payments</Link>
+              </li>
+              <li>
+                <button onClick={toggleDropdown}>
+                  Feedback
+                  <span className="arrow">{dropdownOpen ? "▲" : "▼"}</span>
+                </button>
+                {dropdownOpen && (
+                  <ul className="dropdown-menu">
+                    <li>
+                      <Link to="/all-patient-feedback">All Feedbacks</Link>
+                    </li>
+                    <li>
+                      <Link to="/pending-patient-feedback">
+                        Pending Feedbacks
+                      </Link>
+                    </li>
+                  </ul>
+                )}
+              </li>
+              <li>
+                <button className="logout" onClick={handleLogout}>Logout</button>
+              </li>
+            </ul>
+          </nav>
+        )}
+        {/* Background Section Below Navbar */}
+        <div className="dashboard-content">
+          <h2>Empowering your wellness, one step at a time!</h2>
 
-        <pre>
-          Book your appointments view your medical history update your profile
-          all from this central hub
-        </pre>
-        <p>
-          Use the navigation bar above to explore your appointments, health
-          records, and more.
-        </p>
-        <p>
-          If you need any help or guidance, feel free to contact the support
-          team or check the Help section.
-        </p>
+          <pre>
+            Book your appointments view your medical history update your profile
+            all from this central hub
+          </pre>
+          <p>
+            Use the navigation bar above to explore your appointments, health
+            records, and more.
+          </p>
+          <p>
+            If you need any help or guidance, feel free to contact the support
+            team or check the Help section.
+          </p>
+        </div>
       </div>
-    </div>
+    </body>
   );
 }
 

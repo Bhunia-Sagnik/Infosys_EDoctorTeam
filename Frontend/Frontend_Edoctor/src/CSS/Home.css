@@ -1,12 +1,16 @@
-/* Home.css */
-
-/* Full-page container */
-.body1 {
+/* Home Page Specific Styling */
+body.home-page {
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  background: url("/public/images/bg1.jpg") no-repeat center center fixed;
+  background: url("/public/images/homeBackground.jpg") no-repeat center center fixed;
   background-size: cover;
+  min-height: 100vh;
+  width: 220vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f0f0f0; /* Light color for text to contrast the dark background */
 }
 
 /* Main container for the page */
@@ -16,116 +20,154 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: #333;
+  width: 100%;
+  padding: 20px;
+  margin-top: 2.5rem;
 }
 
 /* Hero section styling */
-.hero-section {
-  background: url("/public/images/bg2.jpg") repeat;
+.home-container .hero-section {
+  background: rgba(0, 0, 0, 0.7); /* Dark translucent overlay */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border for contrast */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 60vh;
-  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
-  padding: 20px;
-  border-radius: 15px;
-  margin-top: 50px;
-  width: 50%;
+  padding: 40px 30px;
+  border-radius: 20px;
+  width: 90%;
   max-width: 600px;
-  max-height: 300px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
 }
 
-.hero-content h1 {
-  font-size: 2.5rem;
-  margin-bottom: 25px;
-  font-weight: bolder;
-  color: #333;
-}
-
-.hero-content p {
-  font-size: 1.2rem;
-  margin-bottom: 50px;
-  color: #555;
+.home-container .hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
   font-weight: bold;
+  color: #ffffff;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
 }
 
-.hero-buttons {
+.home-container .hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #dddddd;
+}
+
+/* Hero buttons styling */
+.home-container .hero-buttons {
   display: flex;
+  justify-content: center;
   gap: 20px;
+  margin-top: 20px;
 }
 
-.hero-buttons .btn {
-  display: inline-block;
-  padding: 10px 20px;
-  width: 50%;
+.home-container .hero-buttons .btn {
+  padding: 12px 30px;
   font-size: 1rem;
-  color: white;
-  background-color: #28a745; /* Green color */
+  color: #ffffff;
+  background: linear-gradient(45deg, #28a745, #218838);
   border: none;
-  border-radius: 5px;
+  border-radius: 30px;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: transform 0.3s, background 0.3s;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
 }
 
-.hero-buttons .btn:hover {
-  background-color: #218838; /* Darker green on hover */
+.home-container .hero-buttons .btn:hover {
+  background: linear-gradient(45deg, #218838, #1e7e34);
+  transform: translateY(-5px);
 }
 
-.hero-buttons .btn.btn-outline {
+.home-container .hero-buttons .btn.btn-outline {
   background-color: transparent;
   color: #28a745;
   border: 2px solid #28a745;
 }
 
-.hero-buttons .btn.btn-outline:hover {
-  background-color: #28a745;
-  color: white;
+.home-container .hero-buttons .btn.btn-outline:hover {
+  background: #28a745;
+  color: #ffffff;
 }
 
 /* Features section styling */
-.features-section {
-  margin-top: 6.4%;
-  width: 100%;
+.home-container .features-section {
+  margin-top: 50px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  padding: 40px;
+  border-radius: 20px;
+  width: 90%;
   max-width: 1200px;
-  padding: 20px;
-  background-color: #41c4f0; /* Blue background */
-  color: white;
-  border-radius: 15px;
+  max-height: fit-content;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  margin-bottom: 40 px;
 }
 
-.features-section h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
+.home-container .features-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  color: #ffffff;
+  text-shadow: 1px 1px 10px rgba(255, 255, 255, 0.2);
 }
 
-.features {
+.home-container .features {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 20px;
 }
 
-.feature {
-  background-color: white;
-  color: #333;
+.home-container .feature {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
   text-align: center;
-  flex: 1 1 250px; /* Ensures responsiveness */
-  max-width: 300px;
+  flex: 1 1 250px;
+  max-width: fit-content;
+  max-height: fit-content;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.feature h3 {
-  font-size: 1.5rem;
+.home-container .feature:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+}
+
+.home-container .feature h3 {
+  font-size: 1.8rem;
   margin-bottom: 10px;
-  color: #007bff;
+  color: #28a745;
 }
 
-.feature p {
+.home-container .feature p {
   font-size: 1rem;
-  color: #555;
+  color: #cccccc;
 }
 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .home-container .hero-section {
+    width: 100%;
+  }
+
+  .home-container .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .home-container .hero-content p {
+    font-size: 1rem;
+  }
+
+  .home-container .features-section {
+    padding: 20px;
+  }
+
+  .home-container .features {
+    flex-direction: column;
+    gap: 15px;
+  }
+}

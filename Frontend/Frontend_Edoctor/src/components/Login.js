@@ -8,6 +8,7 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [errors, setErrors] = useState({});
 
   const validateForm = () => {
@@ -23,11 +24,10 @@ function Login() {
     }
 
     // Validate password
-    if (!password) {
-      newErrors.password = "Password is required.";
-    } else if (password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters long.";
-    }
+    if (!password) newErrors.password = "Password is required";
+    if (!/^.{8,16}$/.test(password) || !/[a-zA-Z]/.test(password) || !/\d/.test(password)) {
+      newErrors.password = "Password must be 8-16 characters long and include both letters and digits";
+    };
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -69,12 +69,12 @@ function Login() {
       const errorMessage =
         error.response?.data?.error ||
         "Login failed. Please check your credentials.";
-      setMessage(errorMessage);
+      setErrorMessage(errorMessage);
     }
   };
 
   return (
-    <div className="login-background">
+    <body className="login-page">
       <div className="login-container">
         <center>
           <h1>LOGIN</h1>
@@ -116,9 +116,13 @@ function Login() {
             Don't have an account? Register
           </Link>
         </div>
-        {message && <p className="message">{message}</p>}
+        {message !== ""?(
+          <p className="message">{message}</p>
+        ): (
+          <p className="error-message">{errorMessage}</p>
+        )}
       </div>
-    </div>
+    </body>
   );
 }
 

@@ -1,14 +1,14 @@
-/* Background image container */
-.login-background {
-  width: 100%;
-  height: 100vh; /* Full viewport height */
-  background-image: url("/public/images/background1.jpg");
-  background-size: cover; /* Ensure the image covers the entire background */
-  background-position: center;
-  display: flex;
-  justify-content: center;
+body.login-page {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url("/public/images/login-bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh; /* Ensures the background covers the full height of the viewport */
+  width: 220vh;
+  display: flex; /* Centers the content vertically and horizontally */
   align-items: center;
-  position: relative;
+  justify-content: center;
 }
 
 /* Form container with semi-transparent background */
@@ -30,7 +30,7 @@
 }
 
 /* Button styling */
-.btn-primary {
+.login-container .btn-primary {
   background-color: #2c3e50;
   font-weight: bold;
   width: 100%;
@@ -42,64 +42,96 @@
   cursor: pointer;
 }
 
-.btn-primary:hover {
-  background-color: #89cfc1;
+.login-container .btn-primary:hover {
+  background-color: green;
 }
 
 /* Footer section links */
-.login-footer {
+.login-container .login-footer {
   margin-top: 10px;
 }
 
-.forgot-password-link,
-.register-link {
+.login-container .forgot-password-link,
+.login-container .register-link {
   color: #551a8b;
   text-decoration: none;
   font-size: 0.9rem;
 }
 
-.forgot-password-link:hover,
-.register-link:hover {
+.login-container .forgot-password-link:hover,
+.login-container .register-link:hover {
   text-decoration: underline;
 }
 
-.register-link {
+.login-container .register-link {
   margin-left: 50px;
 }
 
 /* Input fields and error messages */
-.form-group {
+.login-container .form-group {
   margin-bottom: 15px;
 }
 
-.form-group label {
+.login-container .form-group label {
   display: block;
   font-weight: bold;
   margin-bottom: 5px;
 }
 
-.form-group input {
+.login-container .form-group input {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-.form-group1 input {
+
+.login-container .form-group1 input {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-/* Error messages */
-.error {
-  color: red;
-  font-size: 0.9rem;
-  margin-top: 5px;
+
+/* Error message styling */
+.login-container .error {
+  color: #e74c3c;
+  font-size: 12px;
+  text-align: left;
+}
+
+/* Input fields with error */
+.login-container input.input-error {
+  border-color: #e74c3c;
+  box-shadow: 0 0 5px #e74c3c;
+}
+
+.login-container select.error {
+  border-color: #e74c3c;
+  box-shadow: 0 0 5px #e74c3c;
 }
 
 /* Success or info messages */
-.message {
+.login-container .message {
   color: green;
   font-size: 1rem;
   margin-top: 15px;
+}
+
+.login-container .message {
+  color: green;
+  font-size: 1rem;
+  margin-top: 15px;
+}
+
+.login-container .error-message {
+  color: red;
+  font-size: 1rem;
+  margin-top: 15px;
+}
+
+/* Error text styling for the login form */
+.login-container .error-text {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 5px;
 }

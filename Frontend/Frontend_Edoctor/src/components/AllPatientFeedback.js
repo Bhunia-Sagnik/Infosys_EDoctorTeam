@@ -25,6 +25,25 @@ const PatientFeedback = () => {
     fetchAllFeedbacks();
   }, []);
 
+  const renderStars = (rating) => {
+    const fullStars = Math.floor(rating);
+    const halfStars = rating % 1 !== 0;
+    const emptyStars = 5 - Math.ceil(rating);
+
+    let stars = "";
+    for (let i = 0; i < fullStars; i++) {
+      stars += "★";
+    }
+    if (halfStars) {
+      stars += "✩"; // Half star
+    }
+    for (let i = 0; i < emptyStars; i++) {
+      stars += "☆";
+    }
+
+    return stars;
+  };
+
   return (
     <div className="feedback-page">
       <h1>All Feedbacks</h1>
@@ -45,7 +64,7 @@ const PatientFeedback = () => {
               <tr key={feedback.id}>
                 <td>{feedback.doctor.name}</td>
                 <td>{feedback.feedbackText || "No feedback provided"}</td>
-                <td>{feedback.rating}/5</td>
+                <td className="rating-stars">{renderStars(feedback.rating)}</td>
               </tr>
             ))}
           </tbody>

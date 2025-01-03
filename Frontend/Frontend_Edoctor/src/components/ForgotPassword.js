@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api"; // Ensure this is correctly configured for Axios
 import "../CSS/ForgotPassword.css";
+import validator from "validator";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -12,11 +13,13 @@ function ForgotPassword() {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!email) {
-      newErrors.email = "Email is required.";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      newErrors.email = "Please enter a valid email address.";
+
+    if (validator.isEmpty(email)) {
+      newErrors.email = "Email is required";
+    } else if (!validator.isEmail(email)) {
+      newErrors.email = "Enter a valid email";
     }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -52,35 +55,37 @@ function ForgotPassword() {
   };
 
   return (
-    <div className="forgot-password-background">
-      <div className="forgot-password-container">
-        <h1>Forgot Password</h1>
-        <form onSubmit={handleForgotPassword}>
-          <div className="form-group">
-            <label>Email:</label>
-            <input
-              type="email"
-              className={`input-field ${errors.email ? "input-error" : ""}`}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-            />
-            {errors.email && <p className="error-text">{errors.email}</p>}
-          </div>
-          <button className="btn-primary" type="submit" disabled={loading}>
-            {loading ? "OTP is being sent..." : "Send OTP"}
-          </button>
-        </form>
+    <body className="forgot-password-page">
+      <div className="forgot-password-background">
+        <div className="forgot-password-container">
+          <h1>Forgot Password</h1>
+          <form onSubmit={handleForgotPassword}>
+            <div className="form-group">
+              <label>Email:</label>
+              <input
+                type="email"
+                className={`input-field ${errors.email ? "input-error" : ""}`}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+              />
+              {errors.email && <p className="error-text">{errors.email}</p>}
+            </div>
+            <button className="btn-primary" type="submit" disabled={loading}>
+              {loading ? "OTP is being sent..." : "Send OTP"}
+            </button>
+          </form>
 
-        {message && (
-          <p className="message">
-            {typeof message === "string"
-              ? message
-              : `Error: ${message.error || "Unknown Error"}`}
-          </p>
-        )}
+          {message && (
+            <p className="message">
+              {typeof message === "string"
+                ? message
+                : `Error: ${message.error || "Unknown Error"}`}
+            </p>
+          )}
+        </div>
       </div>
-    </div>
+    </body>
   );
 }
 

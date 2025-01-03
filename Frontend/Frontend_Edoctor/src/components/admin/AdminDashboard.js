@@ -43,7 +43,7 @@ function AdminDashboard() {
   };
 
   return (
-    <div className="dashboard-container">
+    <div className="admin-dashboard-container">
       <header className="dashboard-header">
         <h1>Welcome{adminName ? `, ${adminName}` : " Admin"}!</h1>
       </header>
@@ -156,7 +156,7 @@ function AdminDashboard() {
 
             {/* Logout */}
             <li>
-              <button onClick={handleLogout}>Logout</button>
+              <button className="logout" onClick={handleLogout}>Logout</button>
             </li>
           </ul>
         </nav>
