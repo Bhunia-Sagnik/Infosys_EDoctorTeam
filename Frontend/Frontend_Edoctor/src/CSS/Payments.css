@@ -1,143 +1,225 @@
-/* Basic styling for the payments page */
-.payments-page {
+/* Body Styling */
+body.payments-page {
   font-family: Arial, sans-serif;
-  margin: 20px;
-  background-color: #f4f7f6;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-/* Heading for the payments page */
-h2 {
-  text-align: center;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom right, #2c3e50, #3498db);
   color: #333;
-  font-size: 2.5rem;
-  margin-bottom: 30px;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 30px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease;
 }
 
-/* Appointment table styling */
-table {
+/* Container for the content */
+.payments-page-container {
+  width: 95%;
+  max-width: 1300px;
+  padding: 25px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+  text-align: center;
+  box-sizing: border-box;
+  margin-bottom: 30px;
+  overflow-x: auto;
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Heading Styling */
+.payments-page-container h2 {
+  color: #2c3e50;
+  font-size: 2.8rem;
+  font-weight: bold;
+  margin-bottom: 25px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.payments-page-container h2:hover {
+  transform: scale(1.07); /* Slight hover effect */
+  color: #1abc9c; /* Change color on hover */
+}
+
+/* Table Styling */
+.payments-page-container table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 30px;
-}
-
-table th,
-table td {
-  padding: 12px;
-  text-align: center;
-  border: 1px solid #ddd;
+  margin: 0 auto;
   font-size: 1rem;
-  color: #333;
+  text-align: left;
+  border-radius: 8px;
+  overflow-x: auto;
+  table-layout: auto;
+  word-wrap: break-word;
+  transition: background-color 0.3s ease;
+  animation: fadeInUp 0.6s ease-out;
 }
 
-table th {
-  background-color: #4caf50;
+/* Header Styling */
+.payments-page-container table thead {
+  background: #27ae60;
+  box-shadow: inset 0px -2px 8px rgba(0, 0, 0, 0.1); /* Adds depth to the header */
+}
+
+/* Table Header Cells */
+.payments-page-container table th {
   color: white;
-  font-size: 1.2rem;
+  padding: 12px 20px;
+  border: 1px solid #ddd;
+  background-color: #27ae60;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-table td {
+.payments-page-container table th:hover {
+  background-color: #2ecc71;
+  transform: scale(1.02); /* Slight hover effect for header */
+}
+
+/* Table Body Cells */
+.payments-page-container table td {
+  padding: 12px 20px;
+  border: 1px solid #ddd;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+/* Alternating Row Colors */
+.payments-page-container table tbody tr:nth-child(odd) {
+  background: #f9f9f9;
+}
+
+.payments-page-container table tbody tr:nth-child(even) {
+  background: #ecf0f1;
+}
+
+/* Hover Effect for Rows */
+.payments-page-container table tbody tr:hover {
+  background: #d6eaf8;
+  cursor: pointer;
+  transform: translateY(-3px); /* Subtle lift effect */
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Button Styling */
+.payments-page-container table td button.invoice {
+  background-color: #7fc146;
+  color: white;
+  border: none;
+  padding: 10px 18px;
   font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-table tr:nth-child(even) {
-  background-color: #f9f9f9;
+.payments-page-container table td button.pay {
+  background-color: #d59439;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-table tr:hover {
-  background-color: #f1f1f1;
+.payments-page-container table td button:hover {
+  background-color: #27ae60;
+  transform: scale(1.1);
 }
 
-/* Payment status (Paid/Unpaid) styling */
-td:last-child {
-  display: flex;
+.payments-page-container table td button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+/* Loading Message */
+.payments-page-container p {
+  font-size: 1.3rem;
+  color: #555;
+  animation: fadeIn 1s ease-out;
+  font-weight: bold;
+}
+
+.payments-page-container .success-message {
+  display: none;
+  text-align: center;
+  font-size: 1.5rem;
+  color: green;
+}
+
+.payments-page-container .success-message.show {
+  display: block;
+}
+
+.payments-page-container .success-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #28a745;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
-}
-
-button {
-  padding: 6px 15px;
-  margin: 5px;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-/* Button colors for Pay Now and Download Invoice */
-button:first-of-type {
-  background-color: #4caf50;
   color: white;
-  border: none;
+  font-size: 2rem;
+  animation: successAnimation 2s ease;
 }
 
-button:first-of-type:hover {
-  background-color: #45a049;
+@keyframes successAnimation {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .payments-page-container {
+    padding: 20px;
+  }
+
+  .payments-page-container h2 {
+    font-size: 2.4rem;
+  }
+
+  .payments-page-container table th,
+  .payments-page-container table td {
+    font-size: 1rem;
+    padding: 10px 12px;
+  }
 }
 
-button:last-of-type {
-  background-color: #34495e;
-  color: white;
-  border: none;
+/* Keyframe Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-button:last-of-type:hover {
-  background-color: rgba(6, 6, 44, 0.8);
-}
-
-/* Loader message */
-p {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #777;
-}
-
-/* No confirmed appointments found message */
-.no-appointments-message {
-  text-align: center;
-  color: #f44336;
-  font-size: 1.3rem;
-  margin-top: 30px;
-}
-
-/* No appointments found message when loading */
-p {
-  text-align: center;
-  font-size: 1.2rem;
-  color: #777;
-}
-
-/* Actions and payment button styling */
-button {
-  padding: 6px 15px;
-  margin: 5px;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-button:hover {
-  opacity: 0.8;
-}
-
-/* Disabled state styling */
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-/* Style for "Download Invoice" button */
-button:last-of-type {
-  background-color: #34495e;
-  color: white;
-  border: none;
-}
-
-button:last-of-type:hover {
-  background-color: rgba(6, 6, 44, 0.8);
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -1,0 +1,114 @@
+/* General Body Styling */
+body.doctor-profile {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url("/public/images/register-bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Container Styling */
+.doctor-profile-container {
+  max-width: 500px;
+  width: 100%;
+  max-height: 600px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* Heading Styling */
+.doctor-profile-container h2 {
+  color: #2c3e50;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Profile Details Section */
+.doctor-profile-container .profile-details {
+  background-color: rgba(230, 230, 250, 0.6); /* Light lavender background */
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.doctor-profile-container .profile-details p {
+  font-size: 1rem;
+  color: #333;
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+.doctor-profile-container .profile-details p strong {
+  font-weight: bold;
+  color: #2c3e50; /* Darker text for emphasis */
+}
+
+/* Form Label Styling */
+.doctor-profile-container label {
+  display: block;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+/* Input Fields */
+.doctor-profile-container input,
+.doctor-profile-container select,
+.doctor-profile-container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Button Styling */
+.doctor-profile-container button {
+  width: 100%;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+  margin: 10px 0;
+}
+
+.doctor-profile-container button:hover {
+  background-color: #27ae60;
+}
+
+/* Error Messages */
+.doctor-profile-container .error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.doctor-profile-container .validation-error {
+  border-color: red;
+}

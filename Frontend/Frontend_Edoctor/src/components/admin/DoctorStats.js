@@ -29,53 +29,56 @@ function DoctorStats() {
   }
 
   return (
-    <div className="doctor-stats-container">
-      <h2>Doctor Statistics</h2>
+    <body className="doctor-stats">
+      <div className="doctor-stats-container">
+        <h2>Doctor Statistics</h2>
 
-      {/* Table for displaying doctor stats */}
-      <table className="doctor-stats-table">
-        <thead>
-          <tr>
-            <th rowSpan="2">Doctor ID</th>
-            <th rowSpan="2">Name</th>
-            <th rowSpan="2">Mobile No</th>
-            <th rowSpan="2">Email ID</th>
-            <th rowSpan="2">No. of Appointments</th>
-            <th rowSpan="2">Pending</th>
-            <th colSpan="2">Confirmed</th>
-            <th rowSpan="2">Cancelled</th>
-          </tr>
-          <tr>
-            <th>Paid</th>
-            <th>Unpaid</th>
-          </tr>
-        </thead>
-        <tbody>
-          {doctors.length > 0 ? (
-            doctors.map((doctor) => (
-              <tr key={doctor.doctorId}>
-                <td>{doctor.doctorId}</td>
-                <td>{doctor.name}</td>
-                <td>{doctor.email}</td>
-                <td>{doctor.mobileNo}</td>
-                <td>{doctor.specialization}</td>
-                <td>{doctor.totalAppointments}</td>
-                <td className="pending">{doctor.pendingAppointments}</td>
-                <td className="paid">{doctor.paidAppointments || 0}</td>
-                <td className="unpaid">{doctor.unpaidAppointments || 0}</td>
-                <td className="cancelled">{doctor.cancelledApointments}</td>
-              </tr>
-            ))
-          ) : (
+        {/* Table for displaying doctor stats */}
+        <table className="doctor-stats-table">
+          <thead>
             <tr>
-              <td colSpan="9" className="no-data">
-                No data available
-              </td>
+              <th rowSpan="2">Doctor ID</th>
+              <th rowSpan="2">Name</th>
+              <th rowSpan="2">Email ID</th>
+              <th rowSpan="2">Mobile No</th>
+              <th rowSpan="2">Specialization</th>
+              <th rowSpan="2">No. of Appointments</th>
+              <th rowSpan="2">Pending</th>
+              <th colSpan="2">Confirmed</th>
+              <th rowSpan="2">Cancelled</th>
             </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+            <tr>
+              <th>Paid</th>
+              <th>Unpaid</th>
+            </tr>
+          </thead>
+          <tbody>
+            {doctors.length > 0 ? (
+              doctors.map((doctor) => (
+                <tr key={doctor.doctorId}>
+                  <td>{doctor.doctorId}</td>
+                  <td>{doctor.name}</td>
+                  <td>{doctor.email}</td>
+                  <td>{doctor.mobileNo}</td>
+                  <td>{doctor.specialization}</td>
+                  <td>{doctor.totalAppointments}</td>
+                  <td className="pending">{doctor.pendingAppointments}</td>
+                  <td className="paid">{doctor.paidAppointments || 0}</td>
+                  <td className="unpaid">{doctor.unpaidAppointments || 0}</td>
+                  <td className="cancelled">{doctor.cancelledAppointments || 0}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="9" className="no-data">
+                  No data available
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </body>
   );
 }
 

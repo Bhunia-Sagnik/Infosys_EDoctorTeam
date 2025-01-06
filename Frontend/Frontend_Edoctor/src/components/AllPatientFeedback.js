@@ -45,34 +45,36 @@ const PatientFeedback = () => {
   };
 
   return (
-    <div className="feedback-page">
-      <h1>All Feedbacks</h1>
+    <body className="patient-all-feedback">
+      <div className="patient-all-feedback-page">
+        <h1>All Feedbacks</h1>
 
-      {loading && <p>Loading...</p>}
+        {loading && <p>Loading...</p>}
 
-      {!loading && allFeedbacks.length > 0 ? (
-        <table className="feedback-table">
-          <thead>
-            <tr>
-              <th>Doctor</th>
-              <th>Feedback</th>
-              <th>Rating</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allFeedbacks.map((feedback) => (
-              <tr key={feedback.id}>
-                <td>{feedback.doctor.name}</td>
-                <td>{feedback.feedbackText || "No feedback provided"}</td>
-                <td className="rating-stars">{renderStars(feedback.rating)}</td>
+        {!loading && allFeedbacks.length > 0 ? (
+          <table className="feedback-table">
+            <thead>
+              <tr>
+                <th>Doctor</th>
+                <th>Feedback</th>
+                <th>Rating</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        !loading && <p>No feedbacks found.</p>
-      )}
-    </div>
+            </thead>
+            <tbody>
+              {allFeedbacks.map((feedback) => (
+                <tr key={feedback.id}>
+                  <td>{feedback.doctor.name}</td>
+                  <td>{feedback.feedbackText || "No feedback provided"}</td>
+                  <td className="rating-stars">{renderStars(feedback.rating)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          !loading && <p>No feedbacks found.</p>
+        )}
+      </div>
+    </body>
   );
 };
 

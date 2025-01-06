@@ -70,6 +70,7 @@ body.register-page {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  margin: 20px auto;
 }
 
 .register-container button:disabled {

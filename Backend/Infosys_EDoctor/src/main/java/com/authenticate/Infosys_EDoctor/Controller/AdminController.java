@@ -129,7 +129,7 @@ public class AdminController {
         User user = userService.getUserByUsername(patientUsername);
 
         if(user == null || user.getRole() != User.Role.PATIENT) {
-            throw new RuntimeException("No user with username found.");
+            return ResponseEntity.badRequest().body("No user with username found.");
         }
 
         Optional<Patient> patient = patientService.getPatientByEmail(user.getEmail());

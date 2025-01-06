@@ -141,7 +141,8 @@ function PatientAppointmentsPage() {
   };
 
   return (
-    <div className="appointments-page">
+    <body className="patient-appointments">
+      <div className="patient-appointments-page">
       <h2>My Appointments</h2>
 
       {isFetching ? (
@@ -172,7 +173,7 @@ function PatientAppointmentsPage() {
                   <td>{date}</td>
                   <td>{time}</td>
                   <td>{appointment.status}</td>
-                  <td>
+                  <td className="actions">
                     {/* Show "Pay Now" if the appointment is confirmed and not paid */}
                     {appointment.status === "Confirmed" && !appointment.paid && (
                       <button onClick={() => handlePayNow(appointment.appointmentId)} disabled={isProcessing}>
@@ -182,7 +183,11 @@ function PatientAppointmentsPage() {
 
                     {/* Show a tick or message if the appointment is paid */}
                     {appointment.paid && (
-                      <span>✔ Paid - Go to Payments section to download invoice</span>
+                      <span>PAID - Go to Payments section to download invoice</span>
+                    )}
+
+                    {appointment.status === "Cancelled" && (
+                      <span>Completed</span>
                     )}
 
                     {appointment.status === "Pending" && (
@@ -259,6 +264,7 @@ function PatientAppointmentsPage() {
         </div>
       )}
     </div>
+    </body>
   );
 }
 

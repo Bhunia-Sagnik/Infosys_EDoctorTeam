@@ -1,105 +1,160 @@
-.doctor-stats-container {
+/* Body Styling */
+.doctor-stats {
   font-family: Arial, sans-serif;
-  padding: 20px;
-  max-width: 1000px;
-  margin: 0 auto;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom right, #2c3e50, #3498db);
+  color: #333;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 20px;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
+/* Container for the content */
+.doctor-stats-container {
+  width: fit-content;
+  max-width: 1300px;
+  padding: 30px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin-bottom: 30px;
+  animation: fadeIn 1s ease-in-out; /* Fade-in animation */
+}
+
+/* Heading Styling */
 .doctor-stats-container h2 {
   color: #2c3e50;
-  margin-bottom: 20px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  animation: slideInLeft 1s ease-out;
 }
 
-.doctor-stats-table {
+/* Table Styling */
+.doctor-stats-container table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
-}
-
-.doctor-stats-table th,
-.doctor-stats-table td {
+  margin: 0 auto;
+  font-size: 1rem;
   text-align: left;
-  padding: 12px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+  border-radius: 8px;
+  table-layout: auto;
 }
 
-.doctor-stats-table th {
-  background-color: #2c3e50;
+.doctor-stats-container table thead {
+  background: #2c3e50;
   color: white;
 }
 
-.doctor-stats-table tr:nth-child(even) {
-  background-color: #f2f2f2;
+.doctor-stats-container table th {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  background-color: rgb(30, 128, 0);
 }
 
-.doctor-stats-table tr:hover {
-  background-color: #e8f5e9;
+.doctor-stats-container table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  width: fit-content;
 }
 
-.doctor-stats-table td {
-  color: #34495e;
+.doctor-stats-container table tbody tr:nth-child(odd) {
+  background: #f9f9f9;
 }
 
-.doctor-stats-table .paid {
-  color: #27ae60; /* Green for paid */
+.doctor-stats-container table tbody tr:nth-child(even) {
+  background: #ecf0f1;
 }
 
-.doctor-stats-table .not-paid {
-  color: #e74c3c; /* Red for not paid */
-}
-
-.doctor-stats-table .pending {
-  color: #f39c12; /* Yellow for pending */
-}
-
-.doctor-stats-table .cancelled {
-  color: #8e44ad; /* Purple for cancelled */
-}
-
-.doctor-stats-table td[colspan="9"] {
-  text-align: center;
-  font-size: 16px;
-  color: #888;
-}
-
-.doctor-stats-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.doctor-stats-actions button {
-  padding: 10px 20px;
-  background-color: #2c3e50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-weight: bold;
+.doctor-stats-container table tbody tr:hover {
+  background: #d6f8f0;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.doctor-stats-actions button:hover {
-  background-color: #1abc9c;
+/* Column Styling for Status */
+.doctor-stats-container table .pending {
+  background-color: #f39c12;
+  color: white;
+  font-weight: bold;
 }
 
-.doctor-stats-actions select {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
-  background-color: white;
-  cursor: pointer;
+.doctor-stats-container table .paid {
+  background-color: #2ecc71;
+  color: white;
+  font-weight: bold;
 }
 
-.doctor-stats-actions select:focus {
-  outline: none;
-  border-color: #1abc9c;
-  box-shadow: 0 0 4px rgba(26, 188, 156, 0.5);
+.doctor-stats-container table .unpaid {
+  background-color: #e74c3c;
+  color: white;
+  font-weight: bold;
+}
+
+.doctor-stats-container table .cancelled {
+  background-color: #95a5a6;
+  color: white;
+  font-weight: bold;
+}
+
+/* No Data Available Styling */
+.doctor-stats-container .no-data {
+  font-size: 1.2rem;
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+/* Loading Indicator Styling */
+.doctor-stats-container .loading {
+  font-size: 1.5rem;
+  color: #3498db;
+  font-weight: bold;
+}
+
+/* Animation for Fade In */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Animation for Slide In Left */
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .doctor-stats-container {
+    padding: 20px;
+  }
+
+  .doctor-stats-container h2 {
+    font-size: 2rem;
+  }
+
+  .doctor-stats-container table th,
+  .doctor-stats-container table td {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
 }

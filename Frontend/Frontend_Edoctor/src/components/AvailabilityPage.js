@@ -112,66 +112,70 @@ function AvailabilityPage() {
   };
 
   return (
-    <div className="availability-page">
-      <h2>Doctor Availability</h2>
+    <body className="availability-page">
+      <div className="availability-page-container">
+        <h2>Doctor Availability</h2>
 
-      {availabilities.length <= 0?(
-        <p>No availabilities found</p>
-      ): (
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>From Date</th>
-              <th>End Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-              {
-                availabilities.map((availability) => (
-                  <tr key={availability.availabilityId}>
-                    <td>{availability.availabilityId}</td>
-                    <td>{availability.fromDate}</td>
-                    <td>{availability.endDate}</td>
-                    <td>
-                      <button onClick={() => handleEdit(availability)}>Update</button>
-                      <button onClick={() => handleDelete(availability.availabilityId)}>Delete</button>
-                    </td>
-                  </tr>
-                ))
-              }
-          </tbody>
-        </table>
-      )}
+        {availabilities.length <= 0?(
+          <p>No availabilities found</p>
+        ): (
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>From Date</th>
+                <th>End Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+                {
+                  availabilities.map((availability) => (
+                    <tr key={availability.availabilityId}>
+                      <td>{availability.availabilityId}</td>
+                      <td>{availability.fromDate}</td>
+                      <td>{availability.endDate}</td>
+                      <td>
+                        <button onClick={() => handleEdit(availability)}>Update</button>
+                        <button onClick={() => handleDelete(availability.availabilityId)}>Delete</button>
+                      </td>
+                    </tr>
+                  ))
+                }
+            </tbody>
+          </table>
+        )}
 
-      
+        
 
-      <h3>{editAvailabilityId ? "Update Availability" : "Add Availability"}</h3>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>From Date:</label>
-          <input
-            type="date"
-            name="fromDate"
-            value={formData.fromDate}
-            onChange={handleInputChange}
-          />
-          {errors.fromDate && <div className="error">{errors.fromDate}</div>}
+        <div className="availability-form">
+          <h3>{editAvailabilityId ? "Update Availability" : "Add Availability"}</h3>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>From Date:</label>
+              <input
+                type="date"
+                name="fromDate"
+                value={formData.fromDate}
+                onChange={handleInputChange}
+              />
+              {errors.fromDate && <div className="error">{errors.fromDate}</div>}
+            </div>
+            <div className="form-group">
+              <label>End Date:</label>
+              <input
+                type="date"
+                name="endDate"
+                value={formData.endDate}
+                onChange={handleInputChange}
+              />
+              {errors.endDate && <div className="error">{errors.endDate}</div>}
+            </div>
+            <button type="submit">{editAvailabilityId ? "Update" : "Add"} Availability</button>
+          </form>
         </div>
-        <div className="form-group">
-          <label>End Date:</label>
-          <input
-            type="date"
-            name="endDate"
-            value={formData.endDate}
-            onChange={handleInputChange}
-          />
-          {errors.endDate && <div className="error">{errors.endDate}</div>}
-        </div>
-        <button type="submit">{editAvailabilityId ? "Update" : "Add"} Availability</button>
-      </form>
-    </div>
+      </div>
+    </body>
   );
 }
 

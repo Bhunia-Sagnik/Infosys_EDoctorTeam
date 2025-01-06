@@ -64,12 +64,18 @@ body.doctor-dashboard {
 .doctor-dashboard-container .dashboard-navbar ul li a,
 .doctor-dashboard-container .dashboard-navbar ul li button {
   text-decoration: none;
-  color: #ecf0f1; /* White text for readability */
+  color: #ecf0f1;
   font-weight: bold;
   padding: 14px 22px;
+  border: none;
+  background-color: transparent;
   border-radius: 50px;
+  display: inline-block;
+  width: 100%;
+  text-align: center; 
   transition: all 0.3s ease;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .doctor-dashboard-container .dashboard-navbar ul li a:hover,
@@ -80,7 +86,9 @@ body.doctor-dashboard {
 }
 
 .doctor-dashboard-container .dashboard-navbar ul li button.logout:hover {
-  background-color: red; /* Darker red for hover */
+  background-color: red; /* Red background on hover */
+  color: #fff; /* White text for better contrast */
+  transform: scale(1.05); /* Optional hover effect */
 }
 
 .doctor-dashboard-container .dropdown-menu {

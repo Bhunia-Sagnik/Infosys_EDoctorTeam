@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import api from "../../services/api";
+import "../../CSS/admin/AdminDeletePatient.css"
 
 function AdminDeletePatient() {
   const [patientId, setPatientId] = useState("");
@@ -19,16 +20,18 @@ function AdminDeletePatient() {
   };
 
   return (
-    <div className="patient-page">
-      <h1>Delete Patient</h1>
-      <input
-        type="text"
-        placeholder="Patient ID"
-        value={patientId}
-        onChange={(e) => setPatientId(e.target.value)}
-      />
-      <button onClick={handleDelete}>Delete Patient</button>
-    </div>
+    <body className="admin-delete-patient">
+      <div className="admin-delete-patient-page">
+        <h1>Delete Patient</h1>
+        <input
+          type="text"
+          placeholder="Patient ID"
+          value={patientId}
+          onChange={(e) => setPatientId(e.target.value)}
+        />
+        <button onClick={handleDelete}>Delete Patient</button>
+      </div>
+    </body>
   );
 }
 

@@ -5,46 +5,55 @@ body.admin-dashboard {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   height: 100%;
   width: 100%;
-  background-color: #f4f6f9; /* Slightly lighter gray */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
+  background-color: #f4f6f9;
+  overflow-x: hidden;
+  color: #2c3e50;
+  animation: fadeIn 1s ease-out;
 }
 
 /* Dashboard Container */
 .admin-dashboard-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  width: 100%; /* Ensure it covers the entire viewport */
+  min-height: 100vh;
+  width: 100%;
   background: url("/public/images/admin-dashboard.jpg") no-repeat center center;
   background-size: cover;
-  min-height: 100%;
-  width: 220vh;
-  box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.1); /* Subtle inner shadow */
+  box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding-bottom: 50px;
+  animation: slideInUp 1s ease-out;
 }
 
 /* Header Section */
 .admin-dashboard-container .dashboard-header {
-  background-color: #34495e; /* Darker blue-gray background for a professional look */
-  color: #ecf0f1; /* Light text color for contrast */
-  padding: 40px 20px;
+  background-color: #34495e;
+  color: #ecf0f1;
+  padding: 30px 20px;
   text-align: center;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  margin: 0;
+  animation: fadeInDown 1s ease-out;
 }
 
 .admin-dashboard-container .dashboard-header h1 {
   margin: 0;
   font-size: 2.5rem;
   font-weight: 700;
-  letter-spacing: 3px;
-  color: #ecf0f1; /* Light text for clarity */
-  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4); /* Stronger shadow for emphasis */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  letter-spacing: 1px;
+  animation: fadeIn 1s ease-out;
 }
 
 /* Navigation Bar */
 .admin-dashboard-container .dashboard-navbar {
-  background-color: #1e2a47; /* Deep navy blue background for a clean, professional appearance */
-  padding: 18px 0;
+  background-color: #1e2a47;
+  padding: 10px 0;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  animation: fadeInLeft 1s ease-out;
 }
 
 .admin-dashboard-container .dashboard-navbar ul {
@@ -57,68 +66,81 @@ body.admin-dashboard {
 }
 
 .admin-dashboard-container .dashboard-navbar ul li {
-  margin: 0 18px;
+  margin: 0 20px;
   position: relative;
 }
 
-.admin-dashboard-container .dashboard-navbar ul li a,
-.admin-dashboard-container .dashboard-navbar ul li button {
+.admin-dashboard-container .dashboard-navbar ul li button,
+.admin-dashboard-container .dashboard-navbar ul li a {
   text-decoration: none;
-  color: #ecf0f1; /* White text for readability */
+  color: #ecf0f1;
   font-weight: bold;
-  padding: 14px 22px;
+  padding: 14px 24px;
+  border: none;
+  background-color: transparent;
   border-radius: 50px;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
   transition: all 0.3s ease;
   cursor: pointer;
+  box-sizing: border-box;
+  font-size: 1rem;
 }
 
-.admin-dashboard-container .dashboard-navbar ul li a:hover,
-.admin-dashboard-container .dashboard-navbar ul li button:hover {
-  background-color: #1abc9c; /* Subtle green for a smooth contrast on hover */
+.admin-dashboard-container .dashboard-navbar ul li button:hover,
+.admin-dashboard-container .dashboard-navbar ul li a:hover {
+  background-color: #1abc9c;
   color: #fff;
   transform: scale(1.05);
 }
 
+/* Logout Button Specific Hover */
 .admin-dashboard-container .dashboard-navbar ul li button.logout:hover {
-  background-color: red; /* Darker red for hover */
+  background-color: red;
+  color: #fff;
 }
 
+/* Dropdown Menu */
 .admin-dashboard-container .dropdown-menu {
-  display: flex;
-  flex-direction: column; /* Stack items vertically */
+  display: none;
+  flex-direction: column;
   position: absolute;
-  top: 50px; /* Adjust the top position to align with the button */
+  top: 100%;
   left: 0;
-  background-color: #34495e; /* Same background color as navbar for consistency */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  padding: 10px 0;
+  background-color: #34495e;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 0;
   border-radius: 8px;
-  width: 200px; /* Set a width for the dropdown */
-  z-index: 1000; /* Ensure it's above other elements */
+  width: 180px;
+  z-index: 1000;
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Add subtle border */
+}
+
+.admin-dashboard-container .dashboard-navbar ul li:hover .dropdown-menu {
+  display: flex;
 }
 
 .admin-dashboard-container .dropdown-menu li {
-  padding: 4px;
-  text-align: left;
+  padding: 8px 12px;
+  white-space: nowrap;
 }
 
 .admin-dashboard-container .dropdown-menu li a {
   text-decoration: none;
-  color: #ecf0f1; /* White text for readability */
+  color: #ecf0f1;
   font-weight: bold;
-  display: block; /* Ensure each link takes up the full width */
-  padding: 8px 0;
+  display: block;
+  padding: 8px 12px;
   transition: all 0.3s ease;
+  text-align: left;
 }
 
 .admin-dashboard-container .dropdown-menu li a:hover {
-  background-color: #1abc9c; /* Green on hover */
+  background-color: #1abc9c;
   color: #fff;
+  border-radius: 5px;
 }
-
-.admin-dashboard-container .dropdown-menu li a:focus {
-  outline: none; /* Remove outline when focused */
-} 
 
 /* Main Content Area */
 .admin-dashboard-container .dashboard-content {
@@ -127,91 +149,120 @@ body.admin-dashboard {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, rgba(178,166,140, 0.7), rgba(220,201,168, 0.7)); /* Maintain gradient */
+  background: linear-gradient(135deg, rgba(245, 245, 220, 0.80), rgba(217, 191, 144, 0.80));
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-  padding: 50px 30px; /* Increased padding for more space */
+  padding: 40px 20px;
   border-radius: 15px;
-  margin: 20px;
-  color: #2c3e50; /* Changed text color to a dark shade for better readability */
-  font-size: 1.25rem; /* Slightly reduced size for a more balanced look */
-  text-align: center;
-  line-height: 1.75; /* Increased line height for better text clarity */
-  font-family: 'Roboto', sans-serif; /* Modern font for better legibility */
-}
-
-/* Main heading styling */
-.admin-dashboard-container .dashboard-content h2 {
-  font-size: 2.5rem; /* Larger heading size */
-  margin-bottom: 20px;
-  font-weight: 700;
+  margin: 20px auto;
   color: #2c3e50;
-  text-transform: uppercase; /* Capitalize headings for emphasis */
-  letter-spacing: 2px; /* Slight letter spacing for clarity */
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  font-size: 1.2rem;
+  text-align: center;
+  width: 90%;
+  transition: all 0.3s ease;
+  opacity: 0;
+  animation: fadeIn 1.5s ease-out forwards;
 }
 
-/* Preformatted text */
-.admin-dashboard-container .dashboard-content pre {
-  font-size: 1.2rem; /* Slightly larger for better readability */
-  line-height: 1.75;
-  margin: 20px 0;
-  color: #ecf0f1; /* Softer color for preformatted text */
-  font-family: 'Courier New', Courier, monospace;
-  background-color: rgba(0, 0, 0, 0.6); /* Added background color for contrast */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Shadow for better separation */
+.admin-dashboard-container .dashboard-content h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: #34495e;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  animation: slideInLeft 1s ease-out;
 }
 
-/* Paragraph text styling */
 .admin-dashboard-container .dashboard-content p {
-  font-size: 1.15rem;
-  color: #ecf0f1; /* Softer text color for paragraphs */
-  font-weight: 400;
-  text-align: justify; /* Justified text for better alignment */
-  max-width: 100%; /* Allow text to take full width */
-  line-height: 1.7;
-  white-space: normal; /* Allow text to wrap normally */
-  overflow: visible; /* Ensure overflow is visible */
-  text-overflow: unset; /* Remove ellipsis */
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #2c3e50; /* Darker text color for better contrast */
+  max-width: fit-content;
+  margin: 0 auto;
+  font-style: italic;
+  text-align: justify;
+  margin-top: 15px;
+  opacity: 0;
+  animation: fadeIn 1.5s ease-out 0.5s forwards;
 }
 
-/* Preformatted text */
-.admin-dashboard-container .dashboard-content pre {
-  font-size: 1.2rem; /* Slightly larger for better readability */
-  line-height: 1.75;
-  margin: 20px 0;
-  color: #ecf0f1; /* Softer color for preformatted text */
-  font-family: 'Courier New', Courier, monospace;
-  background-color: rgba(0, 0, 0, 0.6); /* Added background color for contrast */
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15); /* Shadow for better separation */
-  white-space: pre-wrap; /* Allow wrapping in preformatted text */
-  overflow-wrap: break-word; /* Prevent long words from overflowing */
-  text-overflow: unset; /* Remove ellipsis */
+/* Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 
-/* Adjust font sizes and spacing on smaller screens */
-@media (max-width: 768px) {
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .admin-dashboard-container .dashboard-navbar ul {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .admin-dashboard-container .dashboard-navbar ul li {
+    margin: 10px 0;
+  }
+
   .admin-dashboard-container .dashboard-content {
-    font-size: 1rem; /* Smaller text on mobile */
-    padding: 20px;
+    width: 95%;
   }
 
-  .admin-dashboard-container .dashboard-content h2 {
-    font-size: 1.8rem; /* Adjust heading size for mobile */
-    margin-bottom: 15px;
+  .admin-dashboard-container .dashboard-header h1 {
+    font-size: 1.8rem;
   }
 
-  .admin-dashboard-container .dashboard-content p {
-    font-size: 1rem;
-    margin: 8px 0;
-  }
-
-  .admin-dashboard-container .dashboard-content pre {
-    font-size: 1rem;
-    padding: 15px;
+  .admin-dashboard-container .dashboard-navbar ul li button,
+  .admin-dashboard-container .dashboard-navbar ul li a {
+    padding: 12px 20px;
+    font-size: 0.9rem;
   }
 }

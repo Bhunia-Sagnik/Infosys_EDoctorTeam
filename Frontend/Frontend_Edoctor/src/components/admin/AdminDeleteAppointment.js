@@ -5,6 +5,7 @@ import "../../CSS/admin/AdminDeleteAppointment.css";
 function AdminDeleteAppointment() {
   const [appointments, setAppointments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   // Fetch all appointments when the component loads
   useEffect(() => {
@@ -32,6 +33,7 @@ function AdminDeleteAppointment() {
   const handleDelete = async (appointmentId) => {
     if (window.confirm("Are you sure you want to delete this appointment?")) {
       try {
+        setIsDeleting(true);
         await axios.delete(
           `${localStorage.getItem("username")}/admin/appointmentDelete/${appointmentId}`
         );
@@ -47,48 +49,62 @@ function AdminDeleteAppointment() {
         console.error("Error deleting appointment:", error);
         alert("Failed to delete appointment. Please try again.");
       }
+      finally {
+        setIsDeleting(false);
+      }
     }
   };
 
   return (
-    <div className="admin-delete-appointment">
-      <h2>Delete Appointments</h2>
-      {isLoading ? (
-        <p>Loading appointments...</p>
-      ) : appointments.length === 0 ? (
-        <p>No pending appointments available.</p>
-      ) : (
-        <table className="appointments-table">
-          <thead>
-            <tr>
-              <th>Appointment ID</th>
-              <th>Doctor Name</th>
-              <th>Patient Name</th>
-              <th>Appointment Date & Time</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {appointments.map((appointment) => (
-              <tr key={appointment.appointmentId}>
-                <td>{appointment.appointmentId}</td>
-                <td>Dr. {appointment.doctor.name}</td>
-                <td>{appointment.patient.name}</td>
-                <td>{appointment.appointmentDateTime}</td>
-                <td>
-                  <button
-                    className="delete-btn"
-                    onClick={() => handleDelete(appointment.appointmentId)}
-                  >
-                    Delete
-                  </button>
-                </td>
+    <body className="admin-delete-appointment">
+      <div className="admin-delete-appointment-container">
+        <h2>Delete Appointments</h2>
+        {isLoading ? (
+          <p>Loading appointments...</p>
+        ) : appointments.length === 0 ? (
+          <p>No pending appointments available.</p>
+        ) : (
+          <table className="appointments-table">
+            <thead>
+              <tr>
+                <th>Appointment ID</th>
+                <th>Doctor Name</th>
+                <th>Patient Name</th>
+                <th>Appointment Date</th>
+                <th>Appointment Time</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-    </div>
+            </thead>
+            <tbody>
+              {appointments.map((appointment) => {
+                const dateTime = new Date(appointment.appointmentDateTime);
+                const date = dateTime.toLocaleDateString(); // Extract the date
+                const time = dateTime.toLocaleTimeString(); // Extract the time
+
+                return (
+                  <tr key={appointment.appointmentId}>
+                    <td>{appointment.appointmentId}</td>
+                    <td>Dr. {appointment.doctor.name}</td>
+                    <td>{appointment.patient.name}</td>
+                    <td>{date}</td>
+                    <td>{time}</td>
+                    <td>
+                      <button
+                        className="delete-btn"
+                        onClick={() => handleDelete(appointment.appointmentId)}
+                        disabled={isDeleting}
+                      >
+                        {isDeleting? "Deleting...": "Delete"}
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </body>
   );
 }
 

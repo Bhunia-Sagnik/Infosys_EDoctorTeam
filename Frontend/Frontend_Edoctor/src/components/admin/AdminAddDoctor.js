@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import axios from "../../services/api";
-import "../../CSS/admin/AdminDoctor.css";
+import "../../CSS/admin/AdminAddDoctor.css";
 
 function AdminAddDoctor() {
-  const [doctorUsername, setDoctorUsername] = useState("");
-  const [doctorProfile, setDoctorProfile] = useState(null);
+  const [doctorUsername, setDoctorUsername] = useState(""); // Holds the username entered by admin
+  const [doctorProfile, setDoctorProfile] = useState(null); // Holds the doctor profile fetched from backend
   const [formData, setFormData] = useState({
     name: "",
     specialization: "",
@@ -13,8 +13,10 @@ function AdminAddDoctor() {
     mobileNo: "",
     chargedPerVisit: "",
   });
-  const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({}); // Holds form validation errors
+  const [loading, setLoading] = useState(false); // Tracks loading state for API requests
+  const [isProfileChecked, setIsProfileChecked] = useState(false); // Tracks if the profile has been checked
+  const [profileError, setProfileError] = useState(false); // Tracks error during profile check
 
   const username = localStorage.getItem("username"); // Admin's username
 
@@ -35,8 +37,7 @@ function AdminAddDoctor() {
     }
 
     if (!formData.chargedPerVisit || formData.chargedPerVisit <= 0) {
-      newErrors.chargedPerVisit =
-        "Charged per visit must be a positive number.";
+      newErrors.chargedPerVisit = "Charged per visit must be a positive number.";
     }
 
     setErrors(newErrors);
@@ -52,17 +53,24 @@ function AdminAddDoctor() {
 
     try {
       setLoading(true);
+      setProfileError(null); // Reset any previous error
       const response = await axios.get(
         `/${username}/admin/doctorProfile?doctorUsername=${doctorUsername}`
       );
 
-      alert("Profile already exists. Cannot add a new profile.");
-      setDoctorProfile(response.data);
+      if (response.data === "Create profile") {
+        setDoctorProfile(null); // No profile exists
+      } else {
+        setDoctorProfile(response.data); // Existing profile
+      }
     } catch (error) {
+      alert("Error fetching profile. Check username");
       console.error("Error checking profile:", error);
-      alert("No profile with this username. You can proceed to add one.");
+      setDoctorUsername("");
+      setProfileError(true);
     } finally {
       setLoading(false);
+      setIsProfileChecked(true); // Set profile check status to true
     }
   };
 
@@ -98,6 +106,8 @@ function AdminAddDoctor() {
         chargedPerVisit: "",
       });
       setErrors({});
+      setIsProfileChecked(false); // Reset the profile check status
+      setDoctorUsername(""); // Clear the username after submission
     } catch (error) {
       console.error("Error adding profile:", error);
       alert("Error adding profile. Please try again.");
@@ -107,121 +117,156 @@ function AdminAddDoctor() {
   };
 
   return (
-    <div className="admin-add-doctor-container">
-      <h2>Admin Add Doctor</h2>
+    <body className="admin-add-doctor">
+      <div className="admin-add-doctor-container">
+        <h1>Add Doctor</h1>
 
-      {/* Section to check if a profile exists */}
-      <div className="check-profile-section">
-        <label>Enter Doctor Username:</label>
-        <input
-          type="text"
-          value={doctorUsername}
-          onChange={(e) => setDoctorUsername(e.target.value)}
-        />
-        <button onClick={checkProfile} disabled={loading}>
-          {loading ? "Checking..." : "Check Profile"}
-        </button>
-      </div>
-
-      {/* If profile exists, show profile details */}
-      {doctorProfile && (
-        <div className="profile-details">
-          <h3>Profile Details</h3>
-          <p>
-            <strong>Name:</strong> {doctorProfile.name}
-          </p>
-          <p>
-            <strong>Specialization:</strong> {doctorProfile.specialization}
-          </p>
-          <p>
-            <strong>Location:</strong> {doctorProfile.location}
-          </p>
-          <p>
-            <strong>Hospital Name:</strong> {doctorProfile.hospitalName}
-          </p>
-          <p>
-            <strong>Mobile No:</strong> {doctorProfile.mobileNo}
-          </p>
-          <p>
-            <strong>Charged per Visit:</strong> {doctorProfile.chargedPerVisit}
-          </p>
-        </div>
-      )}
-
-      {/* If no profile exists, show the form to add a profile */}
-      {!doctorProfile && doctorUsername && (
-        <div className="add-profile-section">
-          <h3>Add New Doctor Profile</h3>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label>Name:</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-              />
-              {errors.name && <p className="error">{errors.name}</p>}
-            </div>
-            <div>
-              <label>Specialization:</label>
-              <input
-                type="text"
-                name="specialization"
-                value={formData.specialization}
-                onChange={handleInputChange}
-              />
-              {errors.specialization && (
-                <p className="error">{errors.specialization}</p>
-              )}
-            </div>
-            <div>
-              <label>Location:</label>
-              <input
-                type="text"
-                name="location"
-                value={formData.location}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <label>Hospital Name:</label>
-              <input
-                type="text"
-                name="hospitalName"
-                value={formData.hospitalName}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <label>Mobile Number:</label>
-              <input
-                type="tel"
-                name="mobileNo"
-                value={formData.mobileNo}
-                onChange={handleInputChange}
-              />
-              {errors.mobileNo && <p className="error">{errors.mobileNo}</p>}
-            </div>
-            <div>
-              <label>Charged per Visit:</label>
-              <input
-                type="number"
-                name="chargedPerVisit"
-                value={formData.chargedPerVisit}
-                onChange={handleInputChange}
-              />
-              {errors.chargedPerVisit && (
-                <p className="error">{errors.chargedPerVisit}</p>
-              )}
-            </div>
-            <button type="submit" disabled={loading}>
-              {loading ? "Adding Profile..." : "Add Profile"}
+        {/* Section to check if a profile exists */}
+        {(!isProfileChecked || profileError) && (
+          <div className="check-profile-section">
+            <label>Enter Doctor Username:</label>
+            <input
+              type="text"
+              value={doctorUsername}
+              onChange={(e) => setDoctorUsername(e.target.value)}
+              disabled={loading} // Disable input during backend request
+            />
+            <button onClick={checkProfile} disabled={loading}>
+              {loading ? "Checking..." : "Check Profile"}
             </button>
-          </form>
-        </div>
-      )}
-    </div>
+            {profileError && <p className="error">{profileError}</p>}
+          </div>
+        )}
+
+        {/* If profile exists, show profile details */}
+        {doctorProfile && (
+          <div className="profile-details">
+            <h3>Profile Details</h3>
+            <p>
+              <strong>Name:</strong> {doctorProfile.name}
+            </p>
+            <p>
+              <strong>Specialization:</strong> {doctorProfile.specialization}
+            </p>
+            <p>
+              <strong>Location:</strong> {doctorProfile.location}
+            </p>
+            <p>
+              <strong>Hospital Name:</strong> {doctorProfile.hospitalName}
+            </p>
+            <p>
+              <strong>Mobile No:</strong> {doctorProfile.mobileNo}
+            </p>
+            <p>
+              <strong>Charged per Visit:</strong> {doctorProfile.chargedPerVisit}
+            </p>
+            <button
+              onClick={() => {
+                setDoctorProfile(null);
+                setDoctorUsername("");
+                setIsProfileChecked(false); // Allow user to check another profile
+              }}
+              className="check-another-username"
+            >
+              Check Another Username
+            </button>
+          </div>
+        )}
+
+        {/* If no profile exists, show the form to add a new profile */}
+        {isProfileChecked && !doctorProfile && !profileError && (
+          <div className="add-profile-section">
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="name">Doctor's Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className={errors.name ? "input-error" : ""}
+                />
+                {errors.name && <p className="error">{errors.name}</p>}
+              </div>
+              <div className="form-group">
+                <label htmlFor="specialization">Specialization</label>
+                <input
+                  type="text"
+                  id="specialization"
+                  name="specialization"
+                  value={formData.specialization}
+                  onChange={handleInputChange}
+                  className={errors.specialization ? "input-error" : ""}
+                />
+                {errors.specialization && (
+                  <p className="error">{errors.specialization}</p>
+                )}
+              </div>
+              <div className="form-group">
+                <label htmlFor="location">Location</label>
+                <input
+                  type="text"
+                  id="location"
+                  name="location"
+                  value={formData.location}
+                  onChange={handleInputChange}
+                  className={errors.location ? "input-error" : ""}
+                />
+                {errors.location && (
+                  <p className="error">{errors.location}</p>
+                )}
+              </div>
+              <div className="form-group">
+                <label htmlFor="hospitalName">Hospital Name</label>
+                <input
+                  type="text"
+                  id="hospitalName"
+                  name="hospitalName"
+                  value={formData.hospitalName}
+                  onChange={handleInputChange}
+                  className={errors.hospitalName ? "input-error" : ""}
+                />
+                {errors.hospitalName && (
+                  <p className="error">{errors.hospitalName}</p>
+                )}
+              </div>
+              <div className="form-group">
+                <label htmlFor="mobileNo">Mobile No</label>
+                <input
+                  type="text"
+                  id="mobileNo"
+                  name="mobileNo"
+                  value={formData.mobileNo}
+                  onChange={handleInputChange}
+                  className={errors.mobileNo ? "input-error" : ""}
+                />
+                {errors.mobileNo && <p className="error">{errors.mobileNo}</p>}
+              </div>
+              <div className="form-group">
+                <label htmlFor="chargedPerVisit">Charged per Visit</label>
+                <input
+                  type="number"
+                  id="chargedPerVisit"
+                  name="chargedPerVisit"
+                  value={formData.chargedPerVisit}
+                  onChange={handleInputChange}
+                  className={errors.chargedPerVisit ? "input-error" : "chargedPerVisit"}
+                />
+                {errors.chargedPerVisit && (
+                  <p className="error">{errors.chargedPerVisit}</p>
+                )}
+              </div>
+              <div className="form-group">
+                <button type="submit" disabled={loading}>
+                  {loading ? "Adding..." : "Add Doctor Profile"}
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
+      </div>
+    </body>
   );
 }
 

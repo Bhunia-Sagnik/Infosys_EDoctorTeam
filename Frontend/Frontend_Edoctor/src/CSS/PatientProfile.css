@@ -1,0 +1,120 @@
+/* General Body Styling */
+body.patient-profile {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url("/public/images/register-bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Container Styling */
+.patient-profile-container {
+  max-width: 500px;
+  width: 100%;
+  max-height: 600px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+/* Heading Styling */
+.patient-profile-container h2 {
+  color: #2c3e50;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Profile Details Section */
+.patient-profile-container .profile-details {
+  background-color: rgba(230, 230, 250, 0.6); /* Light lavender background */
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.patient-profile-container .profile-details p {
+  font-size: 1rem;
+  color: #333;
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+.patient-profile-container .profile-details p span {
+  font-weight: bold;
+  color: #2c3e50; /* Darker text for emphasis */
+}
+
+
+/* Form Label Styling */
+.patient-profile-container label {
+  display: block;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+/* Input Fields */
+.patient-profile-container input,
+.patient-profile-container select,
+.patient-profile-container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Button Styling */
+.patient-profile-container .update-button {
+  background-color: #2980b9;
+  color: white;
+  width: 100%;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+.patient-profile-container .update-button:hover {
+  background-color: green;
+}
+
+/* Center-Align Buttons */
+.patient-profile-container button {
+  display: block;
+  margin: 10px auto; /* Centers the button */
+}
+
+/* Error Messages */
+.patient-profile-container .error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.patient-profile-container .validation-error {
+  border-color: red;
+}

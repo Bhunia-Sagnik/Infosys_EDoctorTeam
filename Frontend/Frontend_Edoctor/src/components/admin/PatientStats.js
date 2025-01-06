@@ -30,52 +30,54 @@ function PatientStats() {
   }
 
   return (
-    <div className="patient-stats-container">
-      <h2>Patient Statistics</h2>
+    <body className="patient-stats">
+      <div className="patient-stats-container">
+        <h2>Patient Statistics</h2>
 
-      {/* Table for displaying patient stats */}
-      <table className="patient-stats-table">
-        <thead>
-          <tr>
-            <th rowSpan="2">Patient ID</th>
-            <th rowSpan="2">Name</th>
-            <th rowSpan="2">Mobile No</th>
-            <th rowSpan="2">Email ID</th>
-            <th rowSpan="2">No. of Appointments</th>
-            <th rowSpan="2">Pending</th>
-            <th colSpan="2">Confirmed</th>
-            <th rowSpan="2">Cancelled</th>
-          </tr>
-          <tr>
-            <th>Paid</th>
-            <th>Unpaid</th>
-          </tr>
-        </thead>
-        <tbody>
-          {patients.length > 0 ? (
-            patients.map((patient) => (
-              <tr key={patient.patientId}>
-                <td>{patient.patientId}</td>
-                <td>{patient.name}</td>
-                <td>{patient.mobileNo}</td>
-                <td>{patient.email}</td>
-                <td>{patient.totalAppointments}</td>
-                <td className="pending">{patient.pendingAppointments}</td>
-                <td className="paid">{patient.paidAppointments || 0}</td>
-                <td className="unpaid">{patient.unpaidAppointments || 0}</td>
-                <td className="cancelled">{patient.cancelledAppointments}</td>
-              </tr>
-            ))
-          ) : (
+        {/* Table for displaying patient stats */}
+        <table className="patient-stats-table">
+          <thead>
             <tr>
-              <td colSpan="8" className="no-data">
-                No data available
-              </td>
+              <th rowSpan="2">Patient ID</th>
+              <th rowSpan="2">Name</th>
+              <th rowSpan="2">Mobile No</th>
+              <th rowSpan="2">Email ID</th>
+              <th rowSpan="2">No. of Appointments</th>
+              <th rowSpan="2">Pending</th>
+              <th colSpan="2">Confirmed</th>
+              <th rowSpan="2">Cancelled</th>
             </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
+            <tr>
+              <th>Paid</th>
+              <th>Unpaid</th>
+            </tr>
+          </thead>
+          <tbody>
+            {patients.length > 0 ? (
+              patients.map((patient) => (
+                <tr key={patient.patientId}>
+                  <td>{patient.patientId}</td>
+                  <td>{patient.name}</td>
+                  <td>{patient.mobileNo}</td>
+                  <td>{patient.email}</td>
+                  <td>{patient.totalAppointments}</td>
+                  <td className="pending">{patient.pendingAppointments}</td>
+                  <td className="paid">{patient.paidAppointments || 0}</td>
+                  <td className="unpaid">{patient.unpaidAppointments || 0}</td>
+                  <td className="cancelled">{patient.cancelledAppointments}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="8" className="no-data">
+                  No data available
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </body>
   );
 }
 

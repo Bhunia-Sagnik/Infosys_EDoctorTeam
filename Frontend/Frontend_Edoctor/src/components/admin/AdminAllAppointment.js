@@ -21,43 +21,53 @@ function AdminAllAppointment() {
   }, []);
 
   return (
-    <div className="admin-all-appointments">
-      <h2>All Appointments</h2>
-      {isLoading ? (
-        <p>Loading appointments...</p>
-      ) : (
-        <table className="appointments-table">
-          <thead>
-            <tr>
-              <th>Appointment ID</th>
-              <th>Doctor ID</th>
-              <th>Patient ID</th>
-              <th>Appointment Date & Time</th>
-              <th>Reason</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {appointments.length === 0 ? (
+    <body className="admin-all-appointments">
+      <div className="admin-all-appointments-container">
+        <h2>All Appointments</h2>
+        {isLoading ? (
+          <p>Loading appointments...</p>
+        ) : (
+          <table className="appointments-table">
+            <thead>
               <tr>
-                <td colSpan="6">No appointments available.</td>
+                <th>Appointment ID</th>
+                <th>Doctor ID</th>
+                <th>Patient ID</th>
+                <th>Appointment Date</th>
+                <th>Appointment Time</th>
+                <th>Reason</th>
+                <th>Status</th>
               </tr>
-            ) : (
-              appointments.map((appointment) => (
-                <tr key={appointment.appointmentId}>
-                  <td>{appointment.appointmentId}</td>
-                  <td>{appointment.doctor.doctorId}</td>
-                  <td>{appointment.patient.patientId}</td>
-                  <td>{appointment.appointmentDateTime}</td>
-                  <td>{appointment.reason}</td>
-                  <td>{appointment.status}</td>
+            </thead>
+            <tbody>
+              {appointments.length === 0 ? (
+                <tr>
+                  <td colSpan="7">No appointments available.</td>
                 </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      )}
-    </div>
+              ) : (
+                appointments.map((appointment) => {
+                  const dateTime = new Date(appointment.appointmentDateTime);
+                  const date = dateTime.toLocaleDateString(); // Extract the date
+                  const time = dateTime.toLocaleTimeString(); // Extract the time
+
+                  return (
+                    <tr key={appointment.appointmentId}>
+                      <td>{appointment.appointmentId}</td>
+                      <td>{appointment.doctor.doctorId}</td>
+                      <td>{appointment.patient.patientId}</td>
+                      <td>{date}</td>
+                      <td>{time}</td>
+                      <td>{appointment.reason}</td>
+                      <td>{appointment.status}</td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </body>
   );
 }
 

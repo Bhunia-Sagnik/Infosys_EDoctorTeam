@@ -52,7 +52,7 @@ function DoctorDashboard() {
                 <Link to="/availability">Availability</Link>
               </li>
               <li>
-                <Link to="/appointments">Appointments</Link>
+                <Link to="/doctor-appointments">Appointments</Link>
               </li>
               <li>
                 <Link to="/doc-feedback">View Feedbacks</Link>

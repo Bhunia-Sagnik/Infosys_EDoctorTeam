@@ -8,7 +8,6 @@ function WebStats() {
   const [loading, setLoading] = useState(false);
   const username = localStorage.getItem("username"); // Retrieve username from localStorage
 
-  // Helper function to calculate startDate and endDate based on the selected period
   const calculateDateRange = (period) => {
     const today = new Date();
     let startDate = new Date();
@@ -24,28 +23,20 @@ function WebStats() {
         break;
       case "this-week":
         const dayOfWeek = today.getDay(); // Sunday = 0, Monday = 1, ..., Saturday = 6
-
-        // Calculate start date (last Sunday)
         if (dayOfWeek === 0) {
-          // Today is Sunday, so start date is today
           startDate = new Date(today);
         } else {
-          // Subtract the dayOfWeek to get the last Sunday
           startDate.setDate(today.getDate() - dayOfWeek);
         }
-
-        // Calculate end date (coming Saturday)
         if (dayOfWeek === 6) {
-          // Today is Saturday, so end date is today
           endDate = new Date(today);
         } else {
-          // Add the remaining days to get to the coming Saturday
           endDate.setDate(today.getDate() + (6 - dayOfWeek));
         }
         break;
       case "last-month":
         startDate = new Date(today.getFullYear(), today.getMonth() - 1, 1);
-        endDate = new Date(today.getFullYear(), today.getMonth(), 0); // Last day of the previous month
+        endDate = new Date(today.getFullYear(), today.getMonth(), 0); 
         break;
       case "this-month":
         startDate = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -54,17 +45,13 @@ function WebStats() {
         startDate = endDate = today;
     }
 
-    // Adjust startDate to 00:00:00
     startDate.setHours(0, 0, 0, 0);
-
-    // Adjust endDate to 23:59:59
     endDate.setHours(23, 59, 59, 999);
 
-    // Convert to LocalDateTime format: YYYY-MM-DDTHH:mm:ss
     const formatToLocalDateTime = (date) => {
-      const offset = date.getTimezoneOffset() * 60000; // Convert to milliseconds
-      const localDate = new Date(date.getTime() - offset); // Adjust to local time
-      return localDate.toISOString().slice(0, 19); // Keep only YYYY-MM-DDTHH:mm:ss
+      const offset = date.getTimezoneOffset() * 60000;
+      const localDate = new Date(date.getTime() - offset);
+      return localDate.toISOString().slice(0, 19);
     };
 
     return {
@@ -73,14 +60,11 @@ function WebStats() {
     };
   };
 
-  // Fetch data based on the selected period
   const fetchWebStats = async (period) => {
     setLoading(true);
     try {
       const { startDate, endDate } = calculateDateRange(period);
-      const response = await api.get(
-        `/${username}/admin/webStatsBetween?startDate=${startDate}&endDate=${endDate}`
-      );
+      const response = await api.get(`/${username}/admin/webStatsBetween?startDate=${startDate}&endDate=${endDate}`);
       setWebStats(response.data);
     } catch (error) {
       console.error("Error fetching web stats:", error);
@@ -90,12 +74,10 @@ function WebStats() {
     }
   };
 
-  // Effect to fetch data when the period changes
   useEffect(() => {
     fetchWebStats(selectedPeriod);
   }, [selectedPeriod]);
 
-  // Handle the dropdown change
   const handlePeriodChange = (event) => {
     setSelectedPeriod(event.target.value);
   };
@@ -105,70 +87,75 @@ function WebStats() {
   };
 
   return (
-    <div className="webstats-container">
-      <h2>Web Statistics</h2>
+    <body className="web-stats">
+      <div className="webstats-container">
+        <h2>Web Statistics</h2>
 
-      <div className="webstats-actions">
-        <label htmlFor="period">Select Time Period: </label>
-        <select
-          id="period"
-          value={selectedPeriod}
-          onChange={handlePeriodChange}
-        >
-          <option value="today">Today</option>
-          <option value="last-week">Last Week</option>
-          <option value="this-week">This Week</option>
-          <option value="last-month">Last Month</option>
-          <option value="this-month">This Month</option>
-        </select>
-      </div>
-
-      {loading ? (
-        <p>Loading stats...</p>
-      ) : webStats ? (
-        <div className="webstats-details">
-          <h3>Statistics for {selectedPeriod.replace("-", " ")}</h3>
-          <table className="webstats-table">
-            <tbody>
-              <tr>
-                <th>Start Date</th>
-                <td>{formatDate(webStats.startDate)}</td>
-              </tr>
-              <tr>
-                <th>End Date</th>
-                <td>{formatDate(webStats.endDate)}</td>
-              </tr>
-              <tr>
-                <th>Total Appointments</th>
-                <td>{webStats.totalAppointments}</td>
-              </tr>
-              <tr>
-                <th>Pending Appointments</th>
-                <td>{webStats.pendingAppointments}</td>
-              </tr>
-              <tr>
-                <th>Confirmed Appointments</th>
-                <td>{webStats.confirmedAppointments}</td>
-              </tr>
-              <tr>
-                <th>Cancelled Appointments</th>
-                <td>{webStats.cancelledAppointments}</td>
-              </tr>
-              <tr>
-                <th>Paid Confirmed Appointments</th>
-                <td>{webStats.paidConfirmedAppointments}</td>
-              </tr>
-              <tr>
-                <th>Unpaid Confirmed Appointments</th>
-                <td>{webStats.unpaidConfirmedAppointments}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div className="webstats-actions">
+          <label htmlFor="period">Select Time Period: </label>
+          <select
+            id="period"
+            value={selectedPeriod}
+            onChange={handlePeriodChange}
+            className="period-dropdown"
+          >
+            <option value="today">Today</option>
+            <option value="last-week">Last Week</option>
+            <option value="this-week">This Week</option>
+            <option value="last-month">Last Month</option>
+            <option value="this-month">This Month</option>
+          </select>
         </div>
-      ) : (
-        <p>No data available for the selected period.</p>
-      )}
-    </div>
+
+        {loading ? (
+          <p className="loading-text">Loading stats...</p>
+        ) : webStats ? (
+          <div className="webstats-details">
+            <h3>Statistics for {selectedPeriod.replace("-", " ")}</h3>
+            <div className="stats-card">
+              <table className="webstats-table">
+                <tbody>
+                  <tr>
+                    <th>Start Date</th>
+                    <td>{formatDate(webStats.startDate)}</td>
+                  </tr>
+                  <tr>
+                    <th>End Date</th>
+                    <td>{formatDate(webStats.endDate)}</td>
+                  </tr>
+                  <tr>
+                    <th>Total Appointments</th>
+                    <td>{webStats.totalAppointments}</td>
+                  </tr>
+                  <tr>
+                    <th>Pending Appointments</th>
+                    <td className="pending">{webStats.pendingAppointments}</td>
+                  </tr>
+                  <tr>
+                    <th>Confirmed Appointments</th>
+                    <td className="confirmed">{webStats.confirmedAppointments}</td>
+                  </tr>
+                  <tr>
+                    <th>Cancelled Appointments</th>
+                    <td className="cancelled">{webStats.cancelledAppointments}</td>
+                  </tr>
+                  <tr>
+                    <th>Paid Confirmed Appointments</th>
+                    <td className="paid">{webStats.paidConfirmedAppointments}</td>
+                  </tr>
+                  <tr>
+                    <th>Unpaid Confirmed Appointments</th>
+                    <td className="unpaid">{webStats.unpaidConfirmedAppointments}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ) : (
+          <p className="no-data-text">No data available for the selected period.</p>
+        )}
+      </div>
+    </body>
   );
 }
 

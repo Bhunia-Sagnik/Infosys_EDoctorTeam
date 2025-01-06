@@ -56,40 +56,42 @@ function DoctorFeedback() {
   };
 
   return (
-    <div className="feedback-container">
-      <h2>Feedback</h2>
-      {isLoading ? (
-        <p>Loading feedback...</p>
-      ) : error ? (
-        <p className="error">{error}</p>
-      ) : feedbacks.length <= 0 ? (
-        <p>No feedback available</p>
-      ) : (
-        <>
-          <div className="avg-rating">
-            <strong>Average Rating:</strong> {renderStars(avgRating) || "Not available"}
-          </div>
-          <table className="feedback-table">
-            <thead>
-              <tr>
-                <th>Patient ID</th>
-                <th>Rating</th>
-                <th>Feedback</th>
-              </tr>
-            </thead>
-            <tbody>
-              {feedbacks.map((feedback) => (
-                <tr key={feedback.id}>
-                  <td>{feedback.patient.patientId}</td>
-                  <td className="rating-stars">{renderStars(feedback.rating)}</td>
-                  <td>{feedback.feedbackText}</td>
+    <body className="doctor-feedback-page">
+      <div className="doctor-feedback-page-container">
+        <h2>Feedback</h2>
+        {isLoading ? (
+          <p>Loading feedback...</p>
+        ) : error ? (
+          <p className="error">{error}</p>
+        ) : feedbacks.length <= 0 ? (
+          <p>No feedback available</p>
+        ) : (
+          <>
+            <div className="avg-rating">
+              <strong className="avg-rating-text">Average Rating:</strong> {renderStars(avgRating) || "Not available"}
+            </div>
+            <table className="feedback-table">
+              <thead>
+                <tr>
+                  <th>Patient ID</th>
+                  <th>Rating</th>
+                  <th>Feedback</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </>
-      )}
-    </div>
+              </thead>
+              <tbody>
+                {feedbacks.map((feedback) => (
+                  <tr key={feedback.id}>
+                    <td>{feedback.patient.patientId}</td>
+                    <td className="rating-stars">{renderStars(feedback.rating)}</td>
+                    <td>{feedback.feedbackText}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
+        )}
+      </div>
+    </body>
   );
 }
 
